@@ -39,7 +39,7 @@ and return a decrypted message.
 
 Space complexity will be in O(1) as the input will not affect the needed variable sizes.
 
-Time complexity is different in different parts of the algorithm, wis dependent on the complexity of the mathematical operations in the program
+Time complexity is different in different parts of the algorithm, is dependent on the complexity of the mathematical operations in the program
 and there are many different implementations of the algorithm, but standard RSA-algorithms time complexity will hover between O(log(N^2)) and O(log(N^3)). 
 Which will be the target.
 Usually decryption and private key generation is much slower than encryption and public key generation.
