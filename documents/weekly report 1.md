@@ -2,7 +2,7 @@
 
 ## What have I done this week?
 
-Decided on what the will be (RSA-algorithm). 
+Decided on what the project will be (RSA-algorithm). 
 * Researched on the subject. 
 * Made the specification document for it 
 
@@ -20,6 +20,6 @@ Started late on deciding the project so didn't have time to discuss about the sc
 
 ## What will I do next?
 
-Talk to the course assistant on scoping (puhun siis kyllä suomea). Start coding.
+Talk to the course assistant on scoping (puhun siis kyllä suomea). Start coding, maybe key generation first.
 
 ### Time used this week: ~ 5 hours
