@@ -1,4 +1,4 @@
-# Implementation document
+# Specification document
 
 ## Study program: Computer science/tietojenkäsittelytieteen kandidaatti
 ## Language to be used in the project: English
