@@ -4,7 +4,7 @@
 
 Decided on what the will be (RSA-algorithm). 
 * Researched on the subject. 
-* Made the implementation document for it 
+* Made the specification document for it 
 
 ## How has the program progressed?
 
