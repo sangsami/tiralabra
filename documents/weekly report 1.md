@@ -16,7 +16,7 @@ Learned about the basic of RSA-algorithm.
 
 ## What remained unclear or caused difficulties? Answer this section honestly because you will get help from this section if needed.
 
-Started late on deciding the project so didn't have time to discuss about the scope.
+Started late on deciding the project so didn't have time to discuss about the scope. What is a large enough scope for a good grade?
 
 ## What will I do next?
 
