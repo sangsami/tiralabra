@@ -1,3 +1,9 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package project;
+
 /**
  *
  * @author samidinh
@@ -13,6 +19,7 @@ public class Main {
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        String input;
         while(true){
             System.out.println("************** RSA-algorithm tool **************");
             System.out.println("Choose your options:");
@@ -20,7 +27,7 @@ public class Main {
             System.out.println("2: Encrypt message (must have public key made)");
             System.out.println("3: Decrypt message (must have private key made)");
             System.out.println("0: Exit");
-            String input = scanner.nextLine();
+            input = scanner.nextLine();
             if(input.equals("0")){
                 break;
             } else if(input.equals("1")){

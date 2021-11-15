@@ -4,6 +4,10 @@
  */
 package encrypter;
 
+/**
+ *
+ * @author samidinh
+ */
 import java.math.BigInteger;
 
 /**
@@ -12,8 +16,10 @@ import java.math.BigInteger;
  */
 public class Encrypt {
     
-    public BigInteger[] encrypt(String text, BigInteger publicKey) {
+    public BigInteger encrypt(String text, BigInteger publicKey) {
         
+        return new BigInteger("0");
         
     }
 }
+
