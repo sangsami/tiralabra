@@ -2,7 +2,7 @@
 
 ## What have I done this week?
 
-More research on how RSA-algorithm worked. Started coding the key generator but having trouble to validate that the generated number is a prime, seems like my Miller-Rabin test doesn't work properly.
+More research on how RSA-algorithm worked. Started coding the key generator but having trouble to validate that the generated number is a prime, seems like my Miller-Rabin test doesn't work properly. Added checkstyle and code coverage, no unit tests made yet.
 
 
 ## How has the program progressed?
@@ -20,7 +20,7 @@ Creating own primes that are big enough has been proven to be difficult.
 
 ## What will I do next?
 
-Finish key generator and encrypting/decrypting portion.
+Troubleshooting took longer than expected. Finish key generator and encrypting/decrypting portion. Unit tests
 
 
 ### Time used this week: 12 hours
