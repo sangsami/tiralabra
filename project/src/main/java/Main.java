@@ -3,6 +3,8 @@
  * @author samidinh
  */
 import java.util.Scanner;
+import keyGenerator.KeyGenerator;
+import java.math.BigInteger;
 
 public class Main {
 
@@ -21,6 +23,9 @@ public class Main {
             String input = scanner.nextLine();
             if(input.equals("0")){
                 break;
+            } else if(input.equals("1")){
+                BigInteger generator = KeyGenerator.generatePrime();
+                System.out.println(generator);
             }
         }
     }
