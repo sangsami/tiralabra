@@ -1,4 +1,7 @@
 # tiralabra
+
+[![codecov](https://codecov.io/gh/SangSami/tiralabra/branch/main/graph/badge.svg?token=S2RJH7EL6I)](https://codecov.io/gh/SangSami/tiralabra)
+
 ## DESCRIPTION
 A coding project about RSA-encryption for the course "Aineopintojen harjoitustyö: Tietorakenteet ja algoritmit"
 
