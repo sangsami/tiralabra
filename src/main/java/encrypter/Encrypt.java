@@ -16,9 +16,9 @@ import java.math.BigInteger;
  */
 public class Encrypt {
     
-    public BigInteger encrypt(String text, BigInteger publicKey) {
-        
-        return new BigInteger("0");
+    public static BigInteger encrypt(int toEncrypt, BigInteger publicKeyN, BigInteger publicKeyE) {
+        BigInteger m = new BigInteger(String.valueOf(toEncrypt));
+        return m.modPow(publicKeyE, publicKeyN);
         
     }
 }

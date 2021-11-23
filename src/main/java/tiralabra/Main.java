@@ -10,6 +10,8 @@ package tiralabra;
  */
 import java.util.Scanner;
 import keyGenerator.KeyGenerator;
+import encrypter.Encrypt;
+import decrypter.Decrypt;
 import java.math.BigInteger;
 
 public class Main {
@@ -19,6 +21,7 @@ public class Main {
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        BigInteger[] generator = KeyGenerator.createKeys();
         while(true){
             System.out.println("************** RSA-algorithm tool **************");
             System.out.println("Choose your options:");
@@ -27,11 +30,20 @@ public class Main {
             System.out.println("3: Decrypt message (must have private key made)");
             System.out.println("0: Exit");
             String input = scanner.nextLine();
+            
+
             if(input.equals("0")){
                 break;
             } else if(input.equals("1")){
-                BigInteger generator = KeyGenerator.generatePrime();
-                System.out.println(generator);
+                generator = KeyGenerator.createKeys();
+                for(BigInteger key: generator){
+                    System.out.println(key);
+                }
+            } else if(input.equals("2")){
+                BigInteger encrypted = Encrypt.encrypt(12345, generator[0], generator[1]);
+                System.out.println(encrypted);
+                BigInteger decrypted = Decrypt.decrypt(encrypted, generator[3], generator[0]);
+                System.out.println(decrypted);
             }
         }
     }
