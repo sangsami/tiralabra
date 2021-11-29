@@ -7,6 +7,9 @@ import java.util.Scanner;
  * @author samidinh
  */
 public class IO {
+    /**
+     * Reads inputs.
+     */
     private Scanner scanner;
     /**
      * IO tool to read inputs.
@@ -20,6 +23,7 @@ public class IO {
     /**
      * Prints given parameter and reads given input.
      * @param line to prompt user.
+     * @return returns user input.
      */
 
     public String readInput(String line) {

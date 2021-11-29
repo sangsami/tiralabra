@@ -11,13 +11,17 @@ import java.math.BigInteger;
  * @author samidinh
  */
 public class KeyGenerator {
-    
+    /**
+     * Array size for returnable key array.
+     * Bit length of generated random numbers.
+     * Times to loop Miller-Rabin primality test.
+     */
     private static final int ARRSIZE = 3;
     private static final int BITLENGTH = 1024;
     private static final int TESTTIMES = 128;
     /**
-     * Creates public and private keys for encryption from generated primes
-     * @return BigInteger-array containing public and private keys
+     * Creates public and private keys for encryption from generated primes.
+     * @return BigInteger-array containing public and private keys.
      */
     public static BigInteger[] createKeys() {
         BigInteger p = generatePrime(BITLENGTH, true);
@@ -63,7 +67,8 @@ public class KeyGenerator {
             BigInteger temp = n;
             n = e;
             e = temp;
-        } if (e.compareTo(BigInteger.ONE) == 0) {
+        } 
+        if (e.compareTo(BigInteger.ONE) == 0) {
             return BigInteger.ONE;
         } 
         BigInteger d = BigInteger.ONE
@@ -79,7 +84,7 @@ public class KeyGenerator {
      */
     static BigInteger generatePrimeCandidate(int n, boolean shift) {
         BigInteger candidate = new BigInteger(n, new Random());
-        if(shift) {
+        if (shift) {
             candidate = candidate.setBit(0);
         }
         return candidate;
@@ -93,7 +98,7 @@ public class KeyGenerator {
     static BigInteger generatePrime(int n, boolean shift) {
         BigInteger prime = BigInteger.TWO;
         
-        while(!isPrime(prime, TESTTIMES)) {
+        while (!isPrime(prime, TESTTIMES)) {
             prime = generatePrimeCandidate(n, true);
         } return prime;
     }
@@ -111,7 +116,7 @@ public class KeyGenerator {
      */
     static Boolean isPrime(BigInteger candidate, int n) {
         // Not a prime is divisible by 2
-        if(candidate.mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
+        if (candidate.mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
             return false;
         }
         
@@ -121,12 +126,12 @@ public class KeyGenerator {
         r[0] = candidate.subtract(BigInteger.ONE);
         r[1] = BigInteger.ZERO;
         
-        while(r[0].mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
+        while (r[0].mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
             s = s.add(BigInteger.ONE);
             r = r[0].divideAndRemainder(BigInteger.TWO);
         }
         
-        for(int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             BigInteger a;
             Random rand = new Random();
             do {
@@ -142,12 +147,12 @@ public class KeyGenerator {
                        && !x.equals(candidate.subtract(BigInteger.ONE))) {
                    x = x.modPow(BigInteger.TWO, candidate);
                    
-                   if(x.equals(BigInteger.ONE)) {
+                   if (x.equals(BigInteger.ONE)) {
                        return false;
                     }
                    j = j.add(BigInteger.ONE);
                }
-               if(x.compareTo(candidate.subtract(BigInteger.ONE)) != 0) {
+               if (x.compareTo(candidate.subtract(BigInteger.ONE)) != 0) {
                    return false;
                }
             }

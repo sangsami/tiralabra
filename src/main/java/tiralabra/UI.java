@@ -11,7 +11,12 @@ import textpadding.TextPadding;
  * @author samidinh
  */
 public class UI {
-
+    /**
+     * io.
+     * Public key array.
+     * Private key array.
+     * Encrypted message.
+     */
     private IO io;
     private BigInteger[] publicKey = new BigInteger[2];
     private BigInteger[] privateKey = new BigInteger[2];
@@ -72,7 +77,8 @@ public class UI {
             return;
         }
         System.out.println("Encrypting...");
-        encrypted = encrypter.Encrypt.encrypt(textpadding.TextPadding.textToCipher(message, publicKey), 
+        encrypted = encrypter.Encrypt.encrypt(
+                textpadding.TextPadding.textToCipher(message, publicKey), 
                 publicKey);
         System.out.println("Encrypted message: " + encrypted.toString());
     }
@@ -106,7 +112,7 @@ public class UI {
         System.out.println("Keys ready");
     }
     /**
-     * Prints all possible commands
+     * Prints all possible commands.
      */
     private void printCommands() {
         System.out.println("Choose your options:");
