@@ -11,13 +11,11 @@ import java.math.BigInteger;
  * @author samidinh
  */
 public class KeyGenerator {
-    /**
-     * Array size for returnable key array.
-     * Bit length of generated random numbers.
-     * Times to loop Miller-Rabin primality test.
-     */
+    /** Array size for returnable key array. */
     private static final int ARRSIZE = 3;
+    /** Bit length of generated random numbers. */
     private static final int BITLENGTH = 1024;
+    /** Times to loop Miller-Rabin primality test. */
     private static final int TESTTIMES = 128;
     /**
      * Creates public and private keys for encryption from generated primes.
@@ -104,6 +102,8 @@ public class KeyGenerator {
     }
     /**
      * Miller-Rabin test, yet to moved to it's own method.
+     * @param repeat times to repeat test.
+     * @return Boolean value if given number passes all tests.
      */
     static Boolean millerRabin(int repeat) {
         return false;
@@ -112,7 +112,7 @@ public class KeyGenerator {
      * Checks if given random BigInteger is a probable prime number.
      * @param candidate random BigInteger that will be tested.
      * @param n amount of times Miller-Rabin test to be run.
-     * return Boolean value is given BigInteger could be prime.
+     * @return Boolean value is given BigInteger could be prime.
      */
     static Boolean isPrime(BigInteger candidate, int n) {
         // Not a prime is divisible by 2
@@ -136,7 +136,7 @@ public class KeyGenerator {
             Random rand = new Random();
             do {
                 a = new BigInteger(candidate.bitLength(), rand); 
-                } while(a.compareTo(candidate.subtract(BigInteger.TWO)) >= 0);
+                } while (a.compareTo(candidate.subtract(BigInteger.TWO)) >= 0);
             
             BigInteger x = a.modPow(r[0], candidate);
             

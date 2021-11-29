@@ -11,15 +11,13 @@ import textpadding.TextPadding;
  * @author samidinh
  */
 public class UI {
-    /**
-     * io.
-     * Public key array.
-     * Private key array.
-     * Encrypted message.
-     */
+    /** io. */
     private IO io;
+    /** Public key array. */
     private BigInteger[] publicKey = new BigInteger[2];
+    /** Private key array. */
     private BigInteger[] privateKey = new BigInteger[2];
+    /** Encrypted message. */
     private BigInteger encrypted;
     
     /**
