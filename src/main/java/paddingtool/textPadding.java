@@ -1,4 +1,4 @@
-package paddingTool;
+package paddingtool;
 
 import java.math.BigInteger;
 
@@ -6,7 +6,7 @@ import java.math.BigInteger;
  *
  * @author samidinh
  */
-public class padder {
+public class textPadding {
     
     public static BigInteger textToCipher(String m, BigInteger[] publicKey) {
         BigInteger cipher = new BigInteger(1, m.getBytes());

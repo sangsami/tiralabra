@@ -8,8 +8,12 @@ import java.util.Scanner;
  */
 public class IO {
     private Scanner scanner;
+    /**
+     * IO tool to read inputs
+     * @param scanner to read inputs
+     */
 
-    public IO(Scanner scanner) {
+    IO(Scanner scanner) {
         this.scanner = scanner;
     }
 

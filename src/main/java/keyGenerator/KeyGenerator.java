@@ -1,4 +1,4 @@
-package keyGenerator;
+package keygenerator;
 
 /**
  *
@@ -13,10 +13,14 @@ import java.math.BigInteger;
 public class KeyGenerator {
     
     private static final int ARRSIZE = 3;
-    
+    private static final int BITLENGTH = 3;
+    /**
+     * creates public and private keys for encryption from generated primes
+     * @return BigInteger-array containing public and private keys
+     */
     public static BigInteger[] createKeys() {
-        BigInteger p = generatePrime(1024, true);
-        BigInteger q = generatePrime(1024, true);
+        BigInteger p = generatePrime(BITLENGTH, true);
+        BigInteger q = generatePrime(BITLENGTH, true);
         
         // RSA modulus
         BigInteger n = p.multiply(q);
@@ -32,9 +36,11 @@ public class KeyGenerator {
                 
         BigInteger e = BigInteger.TWO;
         Random rand = new Random();
-        while(!e.gcd(totient).equals(BigInteger.ONE)) {
-            do {e = generatePrimeCandidate(totient.bitLength(), false); 
-            } while(e.compareTo(totient) >= 0);
+        while (!e.gcd(totient).equals(BigInteger.ONE)) {
+            do {
+                e = generatePrimeCandidate(totient.bitLength(), false); 
+            } 
+            while (e.compareTo(totient) >= 0);
         }
         System.out.println("Key e created");
         BigInteger d = modMultipInv(e, totient);
@@ -105,9 +111,11 @@ public class KeyGenerator {
             
             BigInteger x = a.modPow(r[0], candidate);
             
-            if(!x.equals(BigInteger.ONE) || !x.equals(candidate.subtract(BigInteger.ONE))) {
+            if (!x.equals(BigInteger.ONE)
+                    || !x.equals(candidate.subtract(BigInteger.ONE))) {
                BigInteger j = new BigInteger("1");
-               while(j.compareTo(s) < 0 && !x.equals(candidate.subtract(BigInteger.ONE))) {
+               while (j.compareTo(s) < 0
+                       && !x.equals(candidate.subtract(BigInteger.ONE))) {
                    x = x.modPow(BigInteger.TWO, candidate);
                    
                    if(x.equals(BigInteger.ONE)) {

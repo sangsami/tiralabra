@@ -1,13 +1,13 @@
-keyGenerator/KeyGenerator.java
- keyGenerator.KeyGenerator
+keygenerator/KeyGenerator.java
+ keygenerator.KeyGenerator
 decrypter/Decrypt.java
  decrypter.Decrypt
+paddingtool/textPadding.java
+ paddingtool.textPadding
 tiralabra/IO.java
  tiralabra.IO
 encrypter/Encrypt.java
  encrypter.Encrypt
-paddingTool/padder.java
- paddingTool.padder
 tiralabra/UI.java
  tiralabra.UI
 tiralabra/Main.java
