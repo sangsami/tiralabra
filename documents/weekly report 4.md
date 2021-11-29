@@ -6,7 +6,7 @@ Refactored the code, cleaned up for checkstyle, added javadoc comments and impro
 
 ## How has the program progressed?
 
-Code has been refactored, tests are still lacking, checkstyle almost passing, core functionality of tool done (create keys -> take plaintext input -> encrypt it with public key -> decrypt it with private key)
+Code has been refactored, tests are still lacking, checkstyle passed, core functionality of tool done (create keys -> take plaintext input -> encrypt it with public key -> decrypt it with private key)
 
 
 ## What did I learn this week / today?
