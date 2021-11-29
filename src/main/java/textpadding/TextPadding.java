@@ -1,4 +1,4 @@
-package paddingtool;
+package textpadding;
 
 import java.math.BigInteger;
 
@@ -7,6 +7,7 @@ import java.math.BigInteger;
  * @author samidinh
  */
 public class TextPadding {
+
      /**
      * Turns plain text to cipher.
      * @param m string to be turned to cipher.

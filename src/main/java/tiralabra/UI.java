@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import keygenerator.KeyGenerator;
 import encrypter.Encrypt;
 import decrypter.Decrypt;
-import paddingtool.TextPadding;
+import textpadding.TextPadding;
 
 /**
  *
@@ -72,7 +72,7 @@ public class UI {
             return;
         }
         System.out.println("Encrypting...");
-        encrypted = encrypter.Encrypt.encrypt(paddingtool.TextPadding.textToCipher(message, publicKey), 
+        encrypted = encrypter.Encrypt.encrypt(textpadding.TextPadding.textToCipher(message, publicKey), 
                 publicKey);
         System.out.println("Encrypted message: " + encrypted.toString());
     }
@@ -84,7 +84,7 @@ public class UI {
         try {
             BigInteger data = decrypter.Decrypt.decrypt(encrypted, privateKey);
             String message = 
-                    paddingtool.TextPadding.cipherToText(data, privateKey);
+                    textpadding.TextPadding.cipherToText(data, privateKey);
             System.out.println("Decrypted message: " + message);
         } catch (Exception e) {
             System.out.println(
