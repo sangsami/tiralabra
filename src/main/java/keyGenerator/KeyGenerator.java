@@ -14,7 +14,7 @@ public class KeyGenerator{
     
     private static final int ARRSIZE = 3;
     
-    public static BigInteger[] createKeys(){
+    public static BigInteger[] createKeys() {
         BigInteger p = generatePrime(1024, true);
         BigInteger q = generatePrime(1024, true);
         
@@ -29,7 +29,7 @@ public class KeyGenerator{
                 
         BigInteger e = BigInteger.TWO;
         Random rand = new Random();
-        while(!e.gcd(totient).equals(BigInteger.ONE)){
+        while(!e.gcd(totient).equals(BigInteger.ONE)) {
             do { 
                 e = generatePrimeCandidate(totient.bitLength(), false); 
             } while(e.compareTo(totient) >= 0);
@@ -54,36 +54,37 @@ public class KeyGenerator{
         if (e.compareTo(BigInteger.ONE) == 0) {
             return BigInteger.ONE;
         }
-        BigInteger d = BigInteger.ONE.add(n.multiply(e.subtract(modMultipInv(n.mod(e), e)))).divide(e);
+        BigInteger d = BigInteger.ONE
+                .add(n.multiply(e.subtract(modMultipInv(n.mod(e), e))))
+                .divide(e);
         return d;
     }
     
     // Create [n-1, n-bits] range random BigInteger
-    static BigInteger generatePrimeCandidate(int bits, boolean shift){
+    static BigInteger generatePrimeCandidate(int bits, boolean shift) {
         BigInteger candidate = new BigInteger(bits, new Random());
-        if(shift){
+        if(shift) {
             candidate = candidate.setBit(0);
         }
-        
         return candidate;
     }
     
-    static BigInteger generatePrime(int bits, boolean shift){
+    static BigInteger generatePrime(int bits, boolean shift) {
         BigInteger prime = BigInteger.TWO;
         
-        while(!isPrime(prime, 128)){
+        while(!isPrime(prime, 128)) {
             prime = generatePrimeCandidate(bits, true);
         }
         
         return prime;
     }
-    static Boolean millerRabin(int repeat){
+    static Boolean millerRabin(int repeat) {
         
         return false;
     }
-    static Boolean isPrime(BigInteger candidate, int n){
+    static Boolean isPrime(BigInteger candidate, int n) {
         // Not a prime is divisible by 2
-        if(candidate.mod(BigInteger.TWO).equals(BigInteger.ZERO)){
+        if(candidate.mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
             return false;
         }
         
@@ -93,12 +94,12 @@ public class KeyGenerator{
         r[0] = candidate.subtract(BigInteger.ONE);
         r[1] = BigInteger.ZERO;
         
-        while(r[0].mod(BigInteger.TWO).equals(BigInteger.ZERO)){
+        while(r[0].mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
             s = s.add(BigInteger.ONE);
             r = r[0].divideAndRemainder(BigInteger.TWO);
         }
         
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i < n; i++) {
             BigInteger a;
             Random rand = new Random();
             do {
@@ -109,16 +110,15 @@ public class KeyGenerator{
             
             if(!x.equals(BigInteger.ONE) || !x.equals(candidate.subtract(BigInteger.ONE))) {
                BigInteger j = new BigInteger("1");
-               while(j.compareTo(s) < 0 && !x.equals(candidate.subtract(BigInteger.ONE))){
+               while(j.compareTo(s) < 0 && !x.equals(candidate.subtract(BigInteger.ONE))) {
                    x = x.modPow(BigInteger.TWO, candidate);
                    
-                   if(x.equals(BigInteger.ONE)){
+                   if(x.equals(BigInteger.ONE)) {
                        return false;
                    }
-                   
                    j = j.add(BigInteger.ONE);
                }
-               if(x.compareTo(candidate.subtract(BigInteger.ONE)) != 0){
+               if(x.compareTo(candidate.subtract(BigInteger.ONE)) != 0) {
                    return false;
                }
             }

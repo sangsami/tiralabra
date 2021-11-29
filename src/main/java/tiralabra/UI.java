@@ -12,12 +12,12 @@ import paddingTool.padder;
  */
 public class UI {
 
-    private final IO io;
+    private IO io;
     private BigInteger[] publicKey = new BigInteger[2];
     private BigInteger[] privateKey = new BigInteger[2];
     private BigInteger encrypted;
     
-    public UI(IO io) {
+    UI(IO io) {
         this.io = io;
     }
 
@@ -56,7 +56,7 @@ public class UI {
     }
 
     private void encrypt() {
-        String message = io.readPlainText();
+        String message = io.readInput("Give input: ");
         if (message.isEmpty()) {
             return;
         }
