@@ -10,7 +10,9 @@ import java.math.BigInteger;
  *
  * @author samidinh
  */
-public class KeyGenerator {
+public class KeyGenerator{
+    
+    private static final int ARRSIZE = 3;
     
     public static BigInteger[] createKeys(){
         BigInteger p = generatePrime(1024, true);
@@ -35,7 +37,7 @@ public class KeyGenerator {
         System.out.println("Key e created");
         BigInteger d = modMultipInv(e, totient); 
         System.out.println("Key d created");
-        BigInteger[] arr = new BigInteger[3];
+        BigInteger[] arr = new BigInteger[ARRSIZE];
         arr[0] = n;
         arr[1] = e;
         arr[2] = d;

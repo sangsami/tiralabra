@@ -21,8 +21,7 @@ public class UI {
         this.io = io;
     }
 
-
-    public void run() {
+    public final void run() {
         System.out.println("************** RSA-algorithm tool **************");
         while (true) {
             printCommands();
