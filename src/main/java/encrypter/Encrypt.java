@@ -12,7 +12,7 @@ import java.math.BigInteger;
  */
 public class Encrypt {
     
-    public static BigInteger encrypt(final BigInteger data, final BigInteger[] publicKey) {
+    public static BigInteger encrypt(BigInteger data, BigInteger[] publicKey) {
         return data.modPow(publicKey[1], publicKey[0]);
         
     }

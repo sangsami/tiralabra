@@ -8,7 +8,7 @@ import java.math.BigInteger;
  */
 public class Decrypt {
     
-    private static BigInteger decrypt(final BigInteger data, final BigInteger[] privateKey) {
+    public static BigInteger decrypt(BigInteger data, BigInteger[] privateKey) {
         return data.modPow(privateKey[1], privateKey[0]);
         
     }
