@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import keygenerator.KeyGenerator;
 import encrypter.Encrypt;
 import decrypter.Decrypt;
-import paddingtool.textPadding;
+import paddingtool.TextPadding;
 
 /**
  *
@@ -18,13 +18,14 @@ public class UI {
     private BigInteger encrypted;
     
     /**
-     * UI tool to show and call commands
+     * UI tool to show and call commands.
+     * @param io initializes scanner.
      */
     UI(IO io) {
         this.io = io;
     }
     /**
-     * Shows all commands and calls them according to input
+     * Shows all commands and calls them according to input.
      */
     public final void run() {
         System.out.println("************** RSA-algorithm tool **************");
@@ -51,19 +52,19 @@ public class UI {
         }
     }
     /**
-     * Load keys from a file
+     * Load keys from a file.
      */
     private void load() {
         
     }
     /**
-     * Save keys to a file
+     * Save keys to a file.
      */
     private void save() {
         
     }
     /**
-     * Encrypts and prints encrypted message from given input
+     * Encrypts and prints encrypted message from given input.
      */
     private void encrypt() {
         String message = io.readInput("Give input: ");
@@ -71,20 +72,19 @@ public class UI {
             return;
         }
         System.out.println("Encrypting...");
-        encrypted = encrypter.Encrypt.encrypt(
-                paddingtool.textPadding.textToCipher(message, publicKey), 
+        encrypted = encrypter.Encrypt.encrypt(paddingtool.TextPadding.textToCipher(message, publicKey), 
                 publicKey);
         System.out.println("Encrypted message: " + encrypted.toString());
     }
     /**
-     * Decrypts input that was given in previous command
+     * Decrypts input that was given in previous command.
      */
     private void decrypt() {
         System.out.println("Decrypting...");
         try {
             BigInteger data = decrypter.Decrypt.decrypt(encrypted, privateKey);
             String message = 
-                    paddingtool.textPadding.cipherToText(data, privateKey);
+                    paddingtool.TextPadding.cipherToText(data, privateKey);
             System.out.println("Decrypted message: " + message);
         } catch (Exception e) {
             System.out.println(
@@ -93,7 +93,7 @@ public class UI {
         }
     }
     /**
-     * Generates public and private keys
+     * Generates public and private keys.
      */
     private void generateKeys() {
         System.out.println("Generating keys...");

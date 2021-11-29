@@ -13,9 +13,10 @@ import java.math.BigInteger;
 public class KeyGenerator {
     
     private static final int ARRSIZE = 3;
-    private static final int BITLENGTH = 3;
+    private static final int BITLENGTH = 1024;
+    private static final int TESTTIMES = 128;
     /**
-     * creates public and private keys for encryption from generated primes
+     * Creates public and private keys for encryption from generated primes
      * @return BigInteger-array containing public and private keys
      */
     public static BigInteger[] createKeys() {
@@ -51,10 +52,14 @@ public class KeyGenerator {
         arr[2] = d;
         return arr;
     }
-    
-    // Extended euclidean algorithm
+    /**
+     * Extended euclidean algorithm.
+     * @param e publicKey.
+     * @param n RSA modulus.
+     * @return modular multiplicative inverse in BigInteger.
+     */
     static BigInteger modMultipInv(BigInteger e, BigInteger n) {
-        if(e.compareTo(n) > 0) {
+        if (e.compareTo(n) > 0) {
             BigInteger temp = n;
             n = e;
             e = temp;
@@ -65,26 +70,45 @@ public class KeyGenerator {
                 .divide(e);
         return d;
     }
-    
-    // Create [n-1, n-bits] range random BigInteger
-    static BigInteger generatePrimeCandidate(int bits, boolean shift) {
-        BigInteger candidate = new BigInteger(bits, new Random());
+    /**
+     * Generates a random BigInteger of n bit length.
+     * @param n bit length of the generated random BigInteger.
+     * @param shift shifts the lower bit length bound to n-1 if true.
+     * @return BigInteger of n bit length.
+     */
+    static BigInteger generatePrimeCandidate(int n, boolean shift) {
+        BigInteger candidate = new BigInteger(n, new Random());
         if(shift) {
             candidate = candidate.setBit(0);
         }
         return candidate;
     }
     
-    static BigInteger generatePrime(int bits, boolean shift) {
+    /**
+     * Generates a prime number.
+     * @param n bit length of the generated random BigInteger.
+     * @param shift shifts the lower bit length bound to n-1 if true.
+     * @return BigInteger prime number of n bit length.
+     */
+    static BigInteger generatePrime(int n, boolean shift) {
         BigInteger prime = BigInteger.TWO;
         
-        while(!isPrime(prime, 128)) {
-            prime = generatePrimeCandidate(bits, true);
+        while(!isPrime(prime, TESTTIMES)) {
+            prime = generatePrimeCandidate(n, true);
         } return prime;
     }
+    /**
+     * Miller-Rabin test, yet to moved to it's own method.
+     */
     static Boolean millerRabin(int repeat) {
         return false;
     }
+    /**
+     * Checks if given random BigInteger is a probable prime number.
+     * @param candidate random BigInteger that will be tested.
+     * @param n amount of times Miller-Rabin test to be run.
+     * return Boolean value is given BigInteger could be prime.
+     */
     static Boolean isPrime(BigInteger candidate, int n) {
         // Not a prime is divisible by 2
         if(candidate.mod(BigInteger.TWO).equals(BigInteger.ZERO)) {

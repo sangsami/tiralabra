@@ -9,13 +9,18 @@ import java.util.Scanner;
 public class IO {
     private Scanner scanner;
     /**
-     * IO tool to read inputs
-     * @param scanner to read inputs
+     * IO tool to read inputs.
+     * @param scanner to read inputs.
      */
 
     IO(Scanner scanner) {
         this.scanner = scanner;
     }
+    
+    /**
+     * Prints given parameter and reads given input.
+     * @param line to prompt user.
+     */
 
     public String readInput(String line) {
         System.out.print(line);
