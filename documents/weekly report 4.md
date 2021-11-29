@@ -17,7 +17,8 @@ Code has been refactored, tests are still lacking, checkstyle almost passing, co
 
 ## What will I do next?
 
-Complete tests, have code coverage updating, make it so keys and data are saved to a file. Access keys and data from files.
+Complete tests, have code coverage updating, make it so keys and data are saved to a file. Access keys and data from files. 
+Generating keys is super slow, thinking about maybe hardcoding some small prime numbers to speed up validating them.
 
 
 ### Time used this week: ~20h
