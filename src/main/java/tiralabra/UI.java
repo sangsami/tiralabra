@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package tiralabra;
 
 import java.math.BigInteger;
@@ -66,7 +62,9 @@ public class UI {
             return;
         }
         System.out.println("Encrypting...");
-        encrypted = encrypter.Encrypt.encrypt(paddingTool.padder.textToCipher(message, publicKey), publicKey);
+        encrypted = encrypter.Encrypt.encrypt(
+                paddingTool.padder.textToCipher(message, publicKey), 
+                publicKey);
         System.out.println("Encrypted message: " + encrypted.toString());
     }
 
@@ -77,7 +75,9 @@ public class UI {
             String message = paddingTool.padder.cipherToText(data, privateKey);
             System.out.println("Decrypted message: " + message);
         } catch (Exception e) {
-            System.out.println("ERROR: Something went horribly wrong! (decrypting failed)");
+            System.out.println(
+                    "Something went wrong!"
+            );
         }
     }
 
@@ -98,7 +98,8 @@ public class UI {
         System.out.println("2: Encrypt message (must have generated keys)");
         System.out.println("3: Decrypt message (must have generated keys)");
         System.out.println("4: Save keys to a file (must have generated keys)");
-        System.out.println("5: Load keys from a file (must have generated keys)");
+        System.out.println(
+                "5: Load keys from a file (must have generated keys)");
         System.out.println("0: Exit");
     }
 

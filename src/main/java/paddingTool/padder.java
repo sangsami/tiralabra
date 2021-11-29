@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package paddingTool;
 
 import java.math.BigInteger;
@@ -12,8 +8,8 @@ import java.math.BigInteger;
  */
 public class padder {
     
-    public static BigInteger textToCipher(String message, BigInteger[] publicKey){
-        BigInteger cipher = new BigInteger(1, message.getBytes());
+    public static BigInteger textToCipher(String m, BigInteger[] publicKey){
+        BigInteger cipher = new BigInteger(1, m.getBytes());
         return cipher.modPow(publicKey[1], publicKey[0]);
     }
     
