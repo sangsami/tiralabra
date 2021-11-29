@@ -16,13 +16,12 @@ import java.math.BigInteger;
  */
 public class KeyGenerator {
     
+    
     public static BigInteger[] createKeys(){
         BigInteger p = generatePrime(1024, true);
-        System.out.println("Prime number p created");
         BigInteger q = generatePrime(1024, true);
-        System.out.println("Prime number q created");
         BigInteger n = p.multiply(q);
-        
+        System.out.println("Key n created");
         BigInteger pMinus = p.subtract(BigInteger.ONE);
         BigInteger qMinus = q.subtract(BigInteger.ONE);
         
@@ -35,17 +34,16 @@ public class KeyGenerator {
                 e = generatePrimeCandidate(cmTotient.bitLength(), false); 
             } while(e.compareTo(cmTotient) >= 0);
         } 
-        System.out.println(e.gcd(cmTotient));
-        
+        System.out.println("Key e created");
         BigInteger d = modMultipInv(e, cmTotient); 
-        
-        BigInteger[] arr = new BigInteger[4];
+        System.out.println("Key d created");
+        BigInteger[] arr = new BigInteger[3];
         arr[0] = n;
         arr[1] = e;
-        arr[2] = n;
-        arr[3] = d;
+        arr[2] = d;
         return arr;
     }
+    
     
     static BigInteger modMultipInv(BigInteger e, BigInteger n) {
         if (e.compareTo(n) > 0) {
@@ -78,8 +76,12 @@ public class KeyGenerator {
         
         return prime;
     }
-    
+    static Boolean millerRabin(int repeat){
+        
+        return false;
+    }
     static Boolean isPrime(BigInteger candidate, int n){
+        // Not a prime is divisible by 2
         if(candidate.mod(BigInteger.TWO).equals(BigInteger.ZERO)){
             return false;
         }

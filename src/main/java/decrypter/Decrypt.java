@@ -12,8 +12,8 @@ import java.math.BigInteger;
  */
 public class Decrypt {
     
-    public static BigInteger decrypt(BigInteger toDecrypt, BigInteger privateKeyD, BigInteger privateKeyN) {
-        return toDecrypt.modPow(privateKeyD, privateKeyN);
+    public static BigInteger decrypt(BigInteger data, BigInteger[] privateKey) {
+        return data.modPow(privateKey[1], privateKey[0]);
         
     }
 }
