@@ -10,7 +10,7 @@ import java.math.BigInteger;
  *
  * @author samidinh
  */
-public class KeyGenerator{
+public class KeyGenerator {
     
     private static final int ARRSIZE = 3;
     
@@ -25,17 +25,19 @@ public class KeyGenerator{
         BigInteger qMinus = q.subtract(BigInteger.ONE);
         
         // Carmichael's totient
-        BigInteger totient = pMinus.divide(pMinus.gcd(qMinus)).multiply(qMinus).abs(); //lcm(n)
+        BigInteger totient = pMinus
+                .divide(pMinus.gcd(qMinus))
+                .multiply(qMinus)
+                .abs(); //lcm(n)
                 
         BigInteger e = BigInteger.TWO;
         Random rand = new Random();
         while(!e.gcd(totient).equals(BigInteger.ONE)) {
-            do { 
-                e = generatePrimeCandidate(totient.bitLength(), false); 
+            do {e = generatePrimeCandidate(totient.bitLength(), false); 
             } while(e.compareTo(totient) >= 0);
-        } 
+        }
         System.out.println("Key e created");
-        BigInteger d = modMultipInv(e, totient); 
+        BigInteger d = modMultipInv(e, totient);
         System.out.println("Key d created");
         BigInteger[] arr = new BigInteger[ARRSIZE];
         arr[0] = n;
@@ -46,15 +48,13 @@ public class KeyGenerator{
     
     // Extended euclidean algorithm
     static BigInteger modMultipInv(BigInteger e, BigInteger n) {
-        if (e.compareTo(n) > 0) {
+        if(e.compareTo(n) > 0) {
             BigInteger temp = n;
             n = e;
             e = temp;
-        }
-        if (e.compareTo(BigInteger.ONE) == 0) {
+        } if (e.compareTo(BigInteger.ONE) == 0) {
             return BigInteger.ONE;
-        }
-        BigInteger d = BigInteger.ONE
+        } BigInteger d = BigInteger.ONE
                 .add(n.multiply(e.subtract(modMultipInv(n.mod(e), e))))
                 .divide(e);
         return d;
@@ -74,12 +74,9 @@ public class KeyGenerator{
         
         while(!isPrime(prime, 128)) {
             prime = generatePrimeCandidate(bits, true);
-        }
-        
-        return prime;
+        } return prime;
     }
     static Boolean millerRabin(int repeat) {
-        
         return false;
     }
     static Boolean isPrime(BigInteger candidate, int n) {
@@ -115,16 +112,13 @@ public class KeyGenerator{
                    
                    if(x.equals(BigInteger.ONE)) {
                        return false;
-                   }
+                    }
                    j = j.add(BigInteger.ONE);
                }
                if(x.compareTo(candidate.subtract(BigInteger.ONE)) != 0) {
                    return false;
                }
             }
-        }
-        return true;
+        } return true;
     }
-    
-
 }
