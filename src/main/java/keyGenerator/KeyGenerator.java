@@ -16,26 +16,28 @@ import java.math.BigInteger;
  */
 public class KeyGenerator {
     
-    
     public static BigInteger[] createKeys(){
         BigInteger p = generatePrime(1024, true);
         BigInteger q = generatePrime(1024, true);
+        
+        // RSA modulus
         BigInteger n = p.multiply(q);
         System.out.println("Key n created");
         BigInteger pMinus = p.subtract(BigInteger.ONE);
         BigInteger qMinus = q.subtract(BigInteger.ONE);
         
-        BigInteger cmTotient = pMinus.divide(pMinus.gcd(qMinus)).multiply(qMinus).abs(); //lcm(n)
+        // Carmichael's totient
+        BigInteger totient = pMinus.divide(pMinus.gcd(qMinus)).multiply(qMinus).abs(); //lcm(n)
                 
         BigInteger e = BigInteger.TWO;
         Random rand = new Random();
-        while(!e.gcd(cmTotient).equals(BigInteger.ONE)){
+        while(!e.gcd(totient).equals(BigInteger.ONE)){
             do { 
-                e = generatePrimeCandidate(cmTotient.bitLength(), false); 
-            } while(e.compareTo(cmTotient) >= 0);
+                e = generatePrimeCandidate(totient.bitLength(), false); 
+            } while(e.compareTo(totient) >= 0);
         } 
         System.out.println("Key e created");
-        BigInteger d = modMultipInv(e, cmTotient); 
+        BigInteger d = modMultipInv(e, totient); 
         System.out.println("Key d created");
         BigInteger[] arr = new BigInteger[3];
         arr[0] = n;
@@ -44,7 +46,7 @@ public class KeyGenerator {
         return arr;
     }
     
-    
+    // Extended euclidean algorithm
     static BigInteger modMultipInv(BigInteger e, BigInteger n) {
         if (e.compareTo(n) > 0) {
             BigInteger temp = n;
@@ -58,6 +60,7 @@ public class KeyGenerator {
         return d;
     }
     
+    // Create [n-1, n-bits] range random BigInteger
     static BigInteger generatePrimeCandidate(int bits, boolean shift){
         BigInteger candidate = new BigInteger(bits, new Random());
         if(shift){
@@ -86,6 +89,7 @@ public class KeyGenerator {
             return false;
         }
         
+        // Miller-Rabin primality test, will be moved as own method soon
         BigInteger s = BigInteger.ZERO;
         BigInteger[] r = new BigInteger[2];
         r[0] = candidate.subtract(BigInteger.ONE);
