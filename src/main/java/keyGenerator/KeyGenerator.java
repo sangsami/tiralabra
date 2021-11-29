@@ -65,7 +65,8 @@ public class KeyGenerator {
             e = temp;
         } if (e.compareTo(BigInteger.ONE) == 0) {
             return BigInteger.ONE;
-        } BigInteger d = BigInteger.ONE
+        } 
+        BigInteger d = BigInteger.ONE
                 .add(n.multiply(e.subtract(modMultipInv(n.mod(e), e))))
                 .divide(e);
         return d;
@@ -83,7 +84,6 @@ public class KeyGenerator {
         }
         return candidate;
     }
-    
     /**
      * Generates a prime number.
      * @param n bit length of the generated random BigInteger.
