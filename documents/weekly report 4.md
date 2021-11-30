@@ -6,7 +6,7 @@ Refactored the code, cleaned up for checkstyle, added javadoc comments and impro
 
 ## How has the program progressed?
 
-Code has been refactored, tests are still lacking, checkstyle passed, core functionality of tool done (create keys -> take plaintext input -> encrypt it with public key -> decrypt it with private key)
+Code has been refactored, tests are still lacking, checkstyle passed, core functionality of tool done (create keys -> take plaintext input -> encrypt it with public key -> decrypt it with private key). Made too many static methods so unit testing is hard (oops), have to refactor code to have constructors.
 
 
 ## What did I learn this week / today?
@@ -19,6 +19,7 @@ Code has been refactored, tests are still lacking, checkstyle passed, core funct
 
 Complete tests, have code coverage updating, make it so keys and data are saved to a file. Access keys and data from files. 
 Generating keys is super slow, thinking about maybe hardcoding some small prime numbers to speed up validating them.
+Refactor code for better unit testing.
 
 
 ### Time used this week: ~20h
