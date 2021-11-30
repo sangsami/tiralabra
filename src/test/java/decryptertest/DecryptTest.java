@@ -22,22 +22,6 @@ public class DecryptTest {
     public DecryptTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-    
     @Test
     public void encryptedDataIsDecryptedCorrectly() {
         // Source for keys wikipedia article about RSA
@@ -46,6 +30,6 @@ public class DecryptTest {
         privateKey[1] = new BigInteger("413");
         
         assertEquals(65, 
-                    encrypter.Encrypt.encrypt(new BigInteger("2790"), privateKey).intValue());
+                    decrypter.Decrypt.decrypt(new BigInteger("2790"), privateKey).intValue());
     }
 }

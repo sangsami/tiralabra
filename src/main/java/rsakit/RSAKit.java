@@ -7,9 +7,9 @@ import keygenerator.KeyGenerator;
  * @author samidinh
  */
 public class RSAKit {    
-    /** KeyGenerator object */
+    /** KeyGenerator object. */
     private KeyGenerator keyGenerator;
-    /** Decrypt object */
+    /** Decrypt object. */
     private Decrypt decrypter;
 
     public RSAKit() {

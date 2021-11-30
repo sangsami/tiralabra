@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="keygeneratortest.KeyGeneratorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-11-30T05:11:50" hostname="Samis-MacBook-Pro.local" time="146.787">
+<testsuite name="keygeneratortest.KeyGeneratorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-11-30T05:24:03" hostname="Samis-MacBook-Pro.local" time="129.264">
   <properties/>
-  <testcase name="keyGeneratorProducesPublicAndPrivateKeys" classname="keygeneratortest.KeyGeneratorTest" time="44.236"/>
-  <testcase name="keyGeneratorIsCreated" classname="keygeneratortest.KeyGeneratorTest" time="57.306"/>
-  <testcase name="keyGeneratorCreatesKeysThatAreKeysToEachOther" classname="keygeneratortest.KeyGeneratorTest" time="45.245"/>
+  <testcase name="keyGeneratorProducesPublicAndPrivateKeys" classname="keygeneratortest.KeyGeneratorTest" time="9.368"/>
+  <testcase name="keyGeneratorIsCreated" classname="keygeneratortest.KeyGeneratorTest" time="22.384"/>
+  <testcase name="keyGeneratorCreatesKeysThatAreKeysToEachOther" classname="keygeneratortest.KeyGeneratorTest" time="97.512"/>
   <system-out><![CDATA[Key n created
 Key e created
 Key d created
