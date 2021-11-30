@@ -14,7 +14,7 @@ import textpadding.TextPadding;
 public class UI {
     /** io. */
     private IO io;
-    /** Tool to call other components */
+    /** Tool to call other components. */
     private RSAKit rsaKit;
     /** Public key array. */
     private BigInteger[] publicKey = new BigInteger[2];
