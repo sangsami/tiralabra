@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import keygenerator.KeyGenerator;
 import encrypter.Encrypt;
 import decrypter.Decrypt;
+import rsakit.RSAKit;
 import textpadding.TextPadding;
 
 /**
@@ -13,6 +14,7 @@ import textpadding.TextPadding;
 public class UI {
     /** io. */
     private IO io;
+    private RSAKit rsaKit;
     /** Public key array. */
     private BigInteger[] publicKey = new BigInteger[2];
     /** Private key array. */
@@ -26,6 +28,8 @@ public class UI {
      */
     UI(IO io) {
         this.io = io;
+        this.rsaKit = new RSAKit();
+        
     }
     /**
      * Shows all commands and calls them according to input.
@@ -76,8 +80,10 @@ public class UI {
         }
         System.out.println("Encrypting...");
         encrypted = encrypter.Encrypt.encrypt(
-                textpadding.TextPadding.textToCipher(message, publicKey), 
-                publicKey);
+                        textpadding.TextPadding.textToCipher(
+                            message, 
+                            this.rsaKit.getPublicKey()), 
+                    this.rsaKit.getPublicKey());
         System.out.println("Encrypted message: " + encrypted.toString());
     }
     /**
@@ -86,9 +92,11 @@ public class UI {
     private void decrypt() {
         System.out.println("Decrypting...");
         try {
-            BigInteger data = decrypter.Decrypt.decrypt(encrypted, privateKey);
+            BigInteger data = decrypter.Decrypt.decrypt(encrypted,
+                    this.rsaKit.getPrivateKey());
             String message = 
-                    textpadding.TextPadding.cipherToText(data, privateKey);
+                    textpadding.TextPadding.cipherToText(data, 
+                            this.rsaKit.getPrivateKey());
             System.out.println("Decrypted message: " + message);
         } catch (Exception e) {
             System.out.println(
@@ -101,12 +109,7 @@ public class UI {
      */
     private void generateKeys() {
         System.out.println("Generating keys...");
-        BigInteger[] generator = KeyGenerator.createKeys();
-        
-        publicKey[0] = generator[0];
-        publicKey[1] = generator[1];
-        privateKey[0] = generator[0];
-        privateKey[1] = generator[2];
+        this.rsaKit.createKeys();
         System.out.println("Keys ready");
     }
     /**

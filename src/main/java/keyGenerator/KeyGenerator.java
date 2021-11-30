@@ -11,17 +11,25 @@ import java.math.BigInteger;
  * @author samidinh
  */
 public class KeyGenerator {
+    private BigInteger[] publicKey;
+    private BigInteger[] privateKey;
     /** Array size for returnable key array. */
     private static final int ARRSIZE = 3;
     /** Bit length of generated random numbers. */
     private static final int BITLENGTH = 1024;
     /** Times to loop Miller-Rabin primality test. */
     private static final int TESTTIMES = 128;
+    
+    public KeyGenerator() {
+        this.publicKey = new BigInteger[2];
+        this.privateKey = new BigInteger[2];
+    }
+    
     /**
      * Creates public and private keys for encryption from generated primes.
      * @return BigInteger-array containing public and private keys.
      */
-    public static BigInteger[] createKeys() {
+    public void createKeys() {
         BigInteger p = generatePrime(BITLENGTH, true);
         BigInteger q = generatePrime(BITLENGTH, true);
         
@@ -48,11 +56,19 @@ public class KeyGenerator {
         System.out.println("Key e created");
         BigInteger d = modMultipInv(e, totient);
         System.out.println("Key d created");
-        BigInteger[] arr = new BigInteger[ARRSIZE];
-        arr[0] = n;
-        arr[1] = e;
-        arr[2] = d;
-        return arr;
+
+        this.publicKey[0] = n;
+        this.publicKey[1] = e;
+        this.privateKey[0] = n;
+        this.privateKey[1] = d;
+    }
+    
+    public BigInteger[] getPublicKey() {
+        return this.publicKey;
+    }
+    
+    public BigInteger[] getPrivateKey() {
+        return this.privateKey;
     }
     /**
      * Extended euclidean algorithm.
@@ -60,7 +76,7 @@ public class KeyGenerator {
      * @param n RSA modulus.
      * @return modular multiplicative inverse in BigInteger.
      */
-    static BigInteger modMultipInv(BigInteger e, BigInteger n) {
+    private BigInteger modMultipInv(BigInteger e, BigInteger n) {
         if (e.compareTo(n) > 0) {
             BigInteger temp = n;
             n = e;
@@ -80,7 +96,7 @@ public class KeyGenerator {
      * @param shift shifts the lower bit length bound to n-1 if true.
      * @return BigInteger of n bit length.
      */
-    static BigInteger generatePrimeCandidate(int n, boolean shift) {
+    private BigInteger generatePrimeCandidate(int n, boolean shift) {
         BigInteger candidate = new BigInteger(n, new Random());
         if (shift) {
             candidate = candidate.setBit(0);
@@ -93,7 +109,7 @@ public class KeyGenerator {
      * @param shift shifts the lower bit length bound to n-1 if true.
      * @return BigInteger prime number of n bit length.
      */
-    static BigInteger generatePrime(int n, boolean shift) {
+    private BigInteger generatePrime(int n, boolean shift) {
         BigInteger prime = BigInteger.TWO;
         
         while (!isPrime(prime, TESTTIMES)) {
@@ -105,7 +121,7 @@ public class KeyGenerator {
      * @param repeat times to repeat test.
      * @return Boolean value if given number passes all tests.
      */
-    static Boolean millerRabin(int repeat) {
+    private Boolean millerRabin(int repeat) {
         return false;
     }
     /**
@@ -114,7 +130,7 @@ public class KeyGenerator {
      * @param n amount of times Miller-Rabin test to be run.
      * @return Boolean value is given BigInteger could be prime.
      */
-    static Boolean isPrime(BigInteger candidate, int n) {
+    private Boolean isPrime(BigInteger candidate, int n) {
         // Not a prime is divisible by 2
         if (candidate.mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
             return false;
@@ -158,4 +174,5 @@ public class KeyGenerator {
             }
         } return true;
     }
+    
 }
