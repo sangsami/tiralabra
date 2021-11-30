@@ -6,10 +6,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.security.KeyPairGenerator;
 import java.math.BigInteger;
-import java.util.Random;
-
+import javax.crypto.Cipher;
+import keygenerator.KeyGenerator;
 
 
 /**
@@ -20,37 +19,35 @@ public class KeyGeneratorTest {
     
     public KeyGeneratorTest() {
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    private KeyGenerator keyGenerator;
+    private BigInteger[] publicKey;
+    private BigInteger[] privateKey;
     
     @Before
     public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+        keyGenerator = new KeyGenerator();
+        keyGenerator.createKeys();
+        privateKey = keyGenerator.getPrivateKey();
+        publicKey = keyGenerator.getPublicKey();
+        
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello()
-    /*@Test
-    public void keyGeneratorCreatesAPrime() {
-        BigInteger primeCandidate = KeyGenerator.
-    }*/
-    
-    /*@Test
-    public void primalityTestReturnsCorrect() {
-        Random rnd = new Random();
-        BigInteger primeTester = new BigInteger(1024, 10, rnd);
+    @Test
+    public void keyGeneratorIsCreated() {
+        assertNotNull(keyGenerator);
+    }
 
-    }*/
+    @Test
+    public void keyGeneratorProducesPublicAndPrivateKeys() {
+        assertNotNull(privateKey);
+        assertNotNull(publicKey);
+    }
+    
+    @Test
+    public void keyGeneratorCreatesKeysThatAreKeysToEachOther() {
+        BigInteger test = new BigInteger("541");
+        BigInteger eModN = test.modPow(publicKey[1], publicKey[0]);
+        BigInteger dModN = eModN.modPow(privateKey[1], privateKey[0]);
+        assertEquals(test, dModN);
+    }
 }

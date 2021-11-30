@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package rsakit;
 import decrypter.Decrypt;
 import java.math.BigInteger;
@@ -11,8 +7,9 @@ import keygenerator.KeyGenerator;
  * @author samidinh
  */
 public class RSAKit {    
-
+    /** KeyGenerator object */
     private KeyGenerator keyGenerator;
+    /** Decrypt object */
     private Decrypt decrypter;
 
     public RSAKit() {

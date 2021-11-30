@@ -11,7 +11,9 @@ import java.math.BigInteger;
  * @author samidinh
  */
 public class KeyGenerator {
+    /** Array for public key. */
     private BigInteger[] publicKey;
+    /** Array for private key. */
     private BigInteger[] privateKey;
     /** Array size for returnable key array. */
     private static final int ARRSIZE = 3;
@@ -27,7 +29,6 @@ public class KeyGenerator {
     
     /**
      * Creates public and private keys for encryption from generated primes.
-     * @return BigInteger-array containing public and private keys.
      */
     public void createKeys() {
         BigInteger p = generatePrime(BITLENGTH, true);
@@ -62,11 +63,17 @@ public class KeyGenerator {
         this.privateKey[0] = n;
         this.privateKey[1] = d;
     }
-    
+    /**
+     * Returns public key.
+     * @return BigInteger[]
+     */
     public BigInteger[] getPublicKey() {
         return this.publicKey;
     }
-    
+    /**
+     * Returns private key.
+     * @return BigInteger[]
+     */
     public BigInteger[] getPrivateKey() {
         return this.privateKey;
     }
