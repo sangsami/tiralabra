@@ -111,7 +111,9 @@ public class UI {
         for (BigInteger key: this.rsaKit.getPublicKey()) {
             Files.writeString(path, key.toString()+System.lineSeparator(), StandardOpenOption.APPEND);
         }
-        
+        Files.writeString(path, this.rsaKit.getPrivateKey()[1]
+                .toString()+System.lineSeparator(),
+                StandardOpenOption.APPEND);
     }
     
     /**
