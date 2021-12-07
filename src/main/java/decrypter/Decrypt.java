@@ -13,8 +13,9 @@ public class Decrypt {
      * @param privateKey privateKey to decrypt with.
      * @return decrypted BigInteger.
      */
-    public static BigInteger decrypt(BigInteger data, BigInteger[] privateKey) {
-        return data.modPow(privateKey[1], privateKey[0]);
+    public static BigInteger decrypt(byte[] data, BigInteger[] privateKey) {
+        BigInteger message = new BigInteger(data);
+        return message.modPow(privateKey[1], privateKey[0]);
         
     }
 }

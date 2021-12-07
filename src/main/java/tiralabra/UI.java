@@ -6,6 +6,16 @@ import encrypter.Encrypt;
 import decrypter.Decrypt;
 import rsakit.RSAKit;
 import textpadding.TextPadding;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -39,7 +49,7 @@ public class UI {
         System.out.println("************** RSA-algorithm tool **************");
         while (true) {
             printCommands();
-            String input = io.readInput("Command: ");
+            String input = this.io.readInput("Command: ");
 
             if (input.equals("0")) {
                 System.out.println("Thank you, bye!");
@@ -51,24 +61,68 @@ public class UI {
             } else if (input.equals("3")) {
                 decrypt();
             } else if (input.equals("4")) {
-                System.out.println("Not yet implemented, try somehing else");
+                try {
+                    saveKeys();
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
             } else if (input.equals("5")) {
-                System.out.println("Not yet implemented, try somehing else");
+               try {
+                    loadKeys();
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
             } else {
                 System.out.println("Invalid command");
             }
         }
     }
     /**
-     * Load keys from a file.
+     * Save encrypted message to a file.
      */
-    private void load() {
+    private void saveMessage() throws IOException {
+        String fileName = "encrypted.txt";
+
+        Path path = Paths.get(fileName);
+        Files.write(path, encrypted.toByteArray());
         
+    }
+    
+    /**
+     * Load encrypted message from a file.
+     */
+    private byte[] loadMessage() throws IOException {
+        String fileName = "encrypted.txt";
+
+        Path path = Paths.get(fileName);
+        byte[] read = Files.readAllBytes(path);
+        return read;
     }
     /**
      * Save keys to a file.
      */
-    private void save() {
+    private void saveKeys() throws IOException {
+        String fileName = "keys.txt";
+        
+        Path path = Paths.get(fileName);
+        Files.deleteIfExists(path);
+        path = Paths.get(fileName);
+        Files.createFile(path);
+        for (BigInteger key: this.rsaKit.getPublicKey()) {
+            Files.writeString(path, key.toString()+System.lineSeparator(), StandardOpenOption.APPEND);
+        }
+        
+    }
+    
+    /**
+     * Load keys from a file.
+     */
+    private void loadKeys() throws IOException {
+        String fileName = "keys.txt";
+
+        Path path = Paths.get(fileName);
+        List<String> read = Files.readAllLines(path);
+        this.rsaKit.setKeys(read);
         
     }
     /**
@@ -85,7 +139,13 @@ public class UI {
                             message, 
                             this.rsaKit.getPublicKey()), 
                     this.rsaKit.getPublicKey());
-        System.out.println("Encrypted message: " + encrypted.toString());
+        try {
+            saveMessage();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        
+        System.out.println("Encrypted message to file encrypted.txt");
     }
     /**
      * Decrypts input that was given in previous command.
@@ -93,7 +153,7 @@ public class UI {
     private void decrypt() {
         System.out.println("Decrypting...");
         try {
-            BigInteger data = decrypter.Decrypt.decrypt(encrypted,
+            BigInteger data = decrypter.Decrypt.decrypt(loadMessage(),
                     this.rsaKit.getPrivateKey());
             String message = 
                     textpadding.TextPadding.cipherToText(data, 

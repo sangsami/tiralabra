@@ -1,6 +1,7 @@
 package rsakit;
 import decrypter.Decrypt;
 import java.math.BigInteger;
+import java.util.List;
 import keygenerator.KeyGenerator;
 /**
  *
@@ -27,5 +28,9 @@ public class RSAKit {
     
     public void createKeys() {
         this.keyGenerator.createKeys();
+    }
+    
+    public void setKeys(List<String> data) {
+        this.keyGenerator.setKeys(data);
     }
 }

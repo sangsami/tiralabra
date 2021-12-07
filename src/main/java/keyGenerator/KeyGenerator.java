@@ -6,6 +6,7 @@ package keygenerator;
  */
 import java.util.Random;
 import java.math.BigInteger;
+import java.util.List;
 /**
  *
  * @author samidinh
@@ -36,7 +37,7 @@ public class KeyGenerator {
         
         // RSA modulus
         BigInteger n = p.multiply(q);
-        System.out.println("Key n created");
+        System.out.println("Modulus n created");
         BigInteger pMinus = p.subtract(BigInteger.ONE);
         BigInteger qMinus = q.subtract(BigInteger.ONE);
         
@@ -47,16 +48,15 @@ public class KeyGenerator {
                 .abs(); //lcm(n)
                 
         BigInteger e = BigInteger.TWO;
-        Random rand = new Random();
         while (!e.gcd(totient).equals(BigInteger.ONE)) {
             do {
                 e = generatePrimeCandidate(totient.bitLength(), false); 
             } 
             while (e.compareTo(totient) >= 0);
         }
-        System.out.println("Key e created");
+        System.out.println("Public exponent e created");
         BigInteger d = modMultipInv(e, totient);
-        System.out.println("Key d created");
+        System.out.println("Private exponent d created");
 
         this.publicKey[0] = n;
         this.publicKey[1] = e;
@@ -76,6 +76,21 @@ public class KeyGenerator {
      */
     public BigInteger[] getPrivateKey() {
         return this.privateKey;
+    }
+    
+    public void setKeys(List<String> data) {
+        this.publicKey[0] = new BigInteger(data.get(0)
+                .replace("\n", "")
+                .replace("\r", ""));
+        this.publicKey[1] = new BigInteger(data.get(1)
+                .replace("\n", "")
+                .replace("\r", ""));
+        this.privateKey[0] = new BigInteger(data.get(0)
+                .replace("\n", "")
+                .replace("\r", ""));
+        this.privateKey[1] = new BigInteger(data.get(2)
+                .replace("\n", "")
+                .replace("\r", ""));
     }
     /**
      * Extended euclidean algorithm.
@@ -124,11 +139,78 @@ public class KeyGenerator {
         } return prime;
     }
     /**
-     * Miller-Rabin test, yet to moved to it's own method.
-     * @param repeat times to repeat test.
+     * Test if candidate is divisible by first 100 primes.
+     * @param candidate prime number candidate.
      * @return Boolean value if given number passes all tests.
      */
-    private Boolean millerRabin(int repeat) {
+    private Boolean smallPrimesTest(BigInteger candidate) {
+        String[] primes
+                = {"2", "3", "5", "7", "11", "13", "17", "19", "23", "29", "31",
+                    "37", "41", "43", "47", "53", "59", "61", "67", "71", "73",
+                    "79", "83", "89", "97", "101", "103", "107", "109", "113",
+                    "127", "131", "137", "139", "149", "151", "157", "163",
+                    "167", "173", "179", "181", "191", "193", "197", "199",
+                    "211", "223", "227", "229", "233", "239", "241", "251",
+                    "257", "263", "269", "271", "277", "281", "283", "293",
+                    "307", "311", "313", "317", "331", "337", "347", "349",
+                    "353", "359", "367", "373", "379", "383", "389", "397",
+                    "401", "409", "419", "421", "431", "433", "439", "443",
+                    "449", "457", "461", "463", "467", "479", "487", "491",
+                    "499", "503", "509", "521", "523", "541"
+                };
+
+        for (String prime: primes) {
+            if (candidate.mod(new BigInteger(prime))
+                    .compareTo(BigInteger.ZERO) == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    /**
+     * Repeats Miller-Rabin test n times.
+     * @param n times to repeat test.
+     * @return Boolean value if given number passes all tests.
+     */
+    private Boolean millerRabinRepeater(BigInteger candidate, int n) {
+        // Miller-Rabin primality test, will be moved as own method soon
+        BigInteger d = candidate.subtract(BigInteger.ONE);
+        
+        while (d.mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
+            d = d.shiftRight(1);
+        }
+        for (int i = 0; i < n; i++) {
+            if (!millerRabinTest(d, candidate)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    /**
+     * Miller-Rabin primality test.
+     * @param d exponent for modular arithmetics.
+     * @param candidate prime candidate and modulus for modular arithmetics.
+     * @return Boolean value if given number passes all tests.
+     */
+    private Boolean millerRabinTest(BigInteger d, BigInteger candidate) {
+        BigInteger a;
+        Random rand = new Random();
+        do {
+            a = new BigInteger(candidate.bitLength(), rand); 
+            } while (a.compareTo(candidate.subtract(BigInteger.TWO)) >= 0);
+            
+        BigInteger x = a.modPow(d, candidate);
+            
+        while (d.compareTo(candidate.subtract(BigInteger.ONE)) != 0) {
+            x = (x.multiply(x)).mod(candidate);
+            d = d.shiftLeft(1);
+            if (x.compareTo(BigInteger.ONE) == 0) {
+                return false;
+            }
+            if (x.compareTo(candidate.subtract(BigInteger.ONE)) == 0) {
+                return true;
+            }
+        }
         return false;
     }
     /**
@@ -143,43 +225,13 @@ public class KeyGenerator {
             return false;
         }
         
-        // Miller-Rabin primality test, will be moved as own method soon
-        BigInteger s = BigInteger.ZERO;
-        BigInteger[] r = new BigInteger[2];
-        r[0] = candidate.subtract(BigInteger.ONE);
-        r[1] = BigInteger.ZERO;
-        
-        while (r[0].mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
-            s = s.add(BigInteger.ONE);
-            r = r[0].divideAndRemainder(BigInteger.TWO);
+        if (!smallPrimesTest(candidate)) {
+            return false;
         }
         
-        for (int i = 0; i < n; i++) {
-            BigInteger a;
-            Random rand = new Random();
-            do {
-                a = new BigInteger(candidate.bitLength(), rand); 
-                } while (a.compareTo(candidate.subtract(BigInteger.TWO)) >= 0);
-            
-            BigInteger x = a.modPow(r[0], candidate);
-            
-            if (!x.equals(BigInteger.ONE)
-                    || !x.equals(candidate.subtract(BigInteger.ONE))) {
-               BigInteger j = new BigInteger("1");
-               while (j.compareTo(s) < 0
-                       && !x.equals(candidate.subtract(BigInteger.ONE))) {
-                   x = x.modPow(BigInteger.TWO, candidate);
-                   
-                   if (x.equals(BigInteger.ONE)) {
-                       return false;
-                    }
-                   j = j.add(BigInteger.ONE);
-               }
-               if (x.compareTo(candidate.subtract(BigInteger.ONE)) != 0) {
-                   return false;
-               }
-            }
-        } return true;
+        if (!millerRabinRepeater(candidate, n)) {
+            return false;
+        }
+        return true;
     }
-    
 }

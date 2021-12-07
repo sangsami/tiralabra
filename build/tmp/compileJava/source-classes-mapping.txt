@@ -1,5 +1,5 @@
-tiralabra/UI.java
- tiralabra.UI
+keygenerator/KeyGenerator.java
+ keygenerator.KeyGenerator
 decrypter/Decrypt.java
  decrypter.Decrypt
 tiralabra/IO.java
@@ -10,7 +10,7 @@ encrypter/Encrypt.java
  encrypter.Encrypt
 rsakit/RSAKit.java
  rsakit.RSAKit
-keygenerator/KeyGenerator.java
- keygenerator.KeyGenerator
+tiralabra/UI.java
+ tiralabra.UI
 tiralabra/Main.java
  tiralabra.Main
