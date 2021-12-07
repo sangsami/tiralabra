@@ -12,7 +12,7 @@ File handling also can't catch all errors and filenames are hardcoded, but those
 
 ## What did I learn this week / today?
 
-Handling files is a misery.
+Handling io with java is misery.
 
 ## What remained unclear or caused difficulties? Answer this section honestly because you will get help from this section if needed.
 
