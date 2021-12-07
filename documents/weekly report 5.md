@@ -20,7 +20,7 @@ File handlling took so much trouble that didn't have time to do much else
 
 ## What will I do next?
 
-Finish documentation, performance analysis and tests.
+Finish rest of the documentation, performance analysis and tests.
 
 
 ### Time used this week: 15h
