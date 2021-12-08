@@ -169,6 +169,7 @@ public class KeyGenerator {
     }
     /**
      * Repeats Miller-Rabin test n times.
+     * @param candidate prime number candidate to be tested.
      * @param n times to repeat test.
      * @return Boolean value if given number passes all tests.
      */

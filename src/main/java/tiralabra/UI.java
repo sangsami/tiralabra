@@ -90,6 +90,7 @@ public class UI {
     
     /**
      * Load encrypted message from a file.
+     * @return byte array message from file to be decrypted.
      */
     private byte[] loadMessage() throws IOException {
         String fileName = "encrypted.txt";
@@ -109,10 +110,12 @@ public class UI {
         path = Paths.get(fileName);
         Files.createFile(path);
         for (BigInteger key: this.rsaKit.getPublicKey()) {
-            Files.writeString(path, key.toString()+System.lineSeparator(), StandardOpenOption.APPEND);
+            Files.writeString(path,
+                    key.toString() + System.lineSeparator(),
+                    StandardOpenOption.APPEND);
         }
         Files.writeString(path, this.rsaKit.getPrivateKey()[1]
-                .toString()+System.lineSeparator(),
+                .toString() + System.lineSeparator(),
                 StandardOpenOption.APPEND);
     }
     
