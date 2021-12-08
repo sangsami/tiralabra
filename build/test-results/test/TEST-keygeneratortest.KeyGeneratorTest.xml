@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="keygeneratortest.KeyGeneratorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-12-08T14:39:46" hostname="Samis-MacBook-Pro.local" time="67.994">
+  <properties/>
+  <testcase name="keyGeneratorProducesPublicAndPrivateKeys" classname="keygeneratortest.KeyGeneratorTest" time="30.38"/>
+  <testcase name="keyGeneratorIsCreated" classname="keygeneratortest.KeyGeneratorTest" time="17.005"/>
+  <testcase name="keyGeneratorCreatesKeysThatAreKeysToEachOther" classname="keygeneratortest.KeyGeneratorTest" time="20.609"/>
+  <system-out><![CDATA[Modulus n created
+Public exponent e created
+Private exponent d created
+Modulus n created
+Public exponent e created
+Private exponent d created
+Modulus n created
+Public exponent e created
+Private exponent d created
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

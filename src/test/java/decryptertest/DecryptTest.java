@@ -30,6 +30,6 @@ public class DecryptTest {
         privateKey[1] = new BigInteger("413");
         
         assertEquals(65, 
-                    decrypter.Decrypt.decrypt(new BigInteger("2790"), privateKey).intValue());
+                    decrypter.Decrypt.decrypt(new BigInteger("2790").toByteArray(), privateKey).intValue());
     }
 }
