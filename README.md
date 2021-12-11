@@ -20,3 +20,7 @@ A coding project about RSA-encryption for the course "Aineopintojen harjoitusty√
 [weekly report 3](https://github.com/Sangsami/tiralabra/blob/main/documents/weekly%20report%203.md)
 
 [weekly report 4](https://github.com/Sangsami/tiralabra/blob/main/documents/weekly%20report%204.md)
+
+[weekly report 5](https://github.com/Sangsami/tiralabra/blob/main/documents/weekly%20report%205.md)
+
+[weekly report 6](https://github.com/Sangsami/tiralabra/blob/main/documents/weekly%20report%206.md)
