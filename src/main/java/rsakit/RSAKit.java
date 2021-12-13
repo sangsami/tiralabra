@@ -27,19 +27,23 @@ public class RSAKit {
     }
     
     private BigInteger padToCipher(String message) {
-        return textpadding.TextPadding.textToCipher(message, this.getPublicKey());
+        return textpadding.TextPadding.textToCipher(
+                message, this.getPublicKey());
     }
     
     private String padToText(BigInteger data) {
-        return textpadding.TextPadding.cipherToText(data, this.getPrivateKey());
+        return textpadding.TextPadding.cipherToText(
+                data, this.getPrivateKey());
     }
     
     public BigInteger encrypt(String message) {
-        return encrypter.Encrypt.encrypt(this.padToCipher(message), this.getPublicKey());
+        return encrypter.Encrypt.encrypt(
+                this.padToCipher(message), this.getPublicKey());
     }
     
     public String decrypt(byte[] data) {
-        return this.padToText(decrypter.Decrypt.decrypt(data, this.getPrivateKey()));
+        return this.padToText(
+                decrypter.Decrypt.decrypt(data, this.getPrivateKey()));
     }
     
     public void createKeys() {
