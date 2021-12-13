@@ -4,6 +4,7 @@
  */
 package encryptertest;
 
+import decrypter.Decrypt;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -21,7 +22,7 @@ public class EcnryptTest {
     
     public EcnryptTest() {
     }
-
+    private Encrypt encrypter = new Encrypt();
     @Test
     public void encrypterWorksWithReadyMadeKey() {
         // Source for keys wikipedia article about RSA
@@ -30,7 +31,7 @@ public class EcnryptTest {
         publicKey[1] = new BigInteger("17");
         
         assertEquals(2790, 
-                    encrypter.Encrypt.encrypt(new BigInteger("65"), publicKey).intValue());
+                    encrypter.encrypt(new BigInteger("65"), publicKey).intValue());
     }
     
 }

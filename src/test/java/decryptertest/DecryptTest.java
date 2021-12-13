@@ -21,7 +21,7 @@ public class DecryptTest {
     
     public DecryptTest() {
     }
-    
+    private Decrypt decrypter = new Decrypt();
     @Test
     public void encryptedDataIsDecryptedCorrectly() {
         // Source for keys wikipedia article about RSA
@@ -30,7 +30,7 @@ public class DecryptTest {
         privateKey[1] = new BigInteger("413");
         
         assertEquals(65, 
-                    decrypter.Decrypt.decrypt(new BigInteger("2790").toByteArray(), privateKey).intValue());
+                    decrypter.decrypt(new BigInteger("2790").toByteArray(), privateKey).intValue());
     }
 }
  
