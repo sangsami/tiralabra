@@ -2,7 +2,6 @@ package tiralabra;
 
 import java.math.BigInteger;
 import keygenerator.KeyGenerator;
-import encrypter.Encrypt;
 import decrypter.Decrypt;
 import rsakit.RSAKit;
 import textpadding.TextPadding;
@@ -139,11 +138,7 @@ public class UI {
             return;
         }
         System.out.println("Encrypting...");
-        encrypted = encrypter.Encrypt.encrypt(
-                        textpadding.TextPadding.textToCipher(
-                            message, 
-                            this.rsaKit.getPublicKey()), 
-                    this.rsaKit.getPublicKey());
+        encrypted = this.rsaKit.encrypt(message);
         try {
             saveMessage();
         } catch (IOException ioe) {
@@ -158,11 +153,7 @@ public class UI {
     private void decrypt() {
         System.out.println("Decrypting...");
         try {
-            BigInteger data = decrypter.Decrypt.decrypt(loadMessage(),
-                    this.rsaKit.getPrivateKey());
-            String message = 
-                    textpadding.TextPadding.cipherToText(data, 
-                            this.rsaKit.getPrivateKey());
+            String message = this.rsaKit.decrypt(loadMessage());
             System.out.println("Decrypted message: " + message);
         } catch (Exception e) {
             System.out.println(
