@@ -2,3 +2,5 @@
 /project/nbproject/
 .DS_Store
 *.html
+*.js
+*.css

@@ -25,7 +25,6 @@ public class IO {
      * @param line to prompt user.
      * @return returns user input.
      */
-
     public String readInput(String line) {
         System.out.print(line);
         return scanner.nextLine();
