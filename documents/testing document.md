@@ -1,15 +1,37 @@
 # Testing document
 
-## Perfomance analysis
+## Coverage report for unit tests
 
-TBD, but right now key creation very slow
 
-## Unit tests
+## What was tested and how
 
-Right now unit tests implemented for classes:
+Parts in the project that were omitted from unit testing: 
+* Main.java
+* IO.java
+* UI.java
+* RSAkit.java
 
-* KeyGenerator
-* Decrypt
-* Encrypt
+These parts mainly comprised of trivial code like getters, setters and the user interface, so I deemed unit tests for these parts unnecessary.
 
-Code coverage percentage is low but only because not every class has yet been tested, overall code covera is pretty good for classes that have unit tests
+### Decrypt.java
+
+One test was made: **encryptedDataIsDecryptedCorrectly()**
+
+Testing inputs were simple predetermined private keyy with a encrypted number where the outcome of decrypted number is already known.
+Encrypted number was inputted with a private key and then asserted that the result is same with the known decrypted number.
+
+### Ecrypt.java
+
+One test was made: **plainNumberEncryptedCorrectly()**
+
+Testing inputs were simple predetermined public key with a plain number where the outcome of the encrypted number is already known.
+Plain number was inputted with a public key and then asserted that the result is same with the known encrypted number.
+
+### KeyGenerator,java
+
+### TextPadding.java
+
+
+## Sources
+
+Keys for encryption and decryption tests: https://en.wikipedia.org/wiki/RSA_(cryptosystem)
