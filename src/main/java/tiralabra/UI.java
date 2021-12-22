@@ -31,6 +31,8 @@ public class UI {
     private BigInteger[] privateKey = new BigInteger[2];
     /** Encrypted message. */
     private BigInteger encrypted;
+    /** 1024 bit length for prime numbers used RSA key generation. */
+    private static final int BITLENGTH = 1024;
     
     /**
      * UI tool to show and call commands.
@@ -65,8 +67,14 @@ public class UI {
                     ioe.printStackTrace();
                 }
             } else if (input.equals("5")) {
+                try {
+                    loadKey("public");
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
+            } else if (input.equals("6")) {
                try {
-                    loadKeys();
+                    loadKey("private");
                 } catch (IOException ioe) {
                     ioe.printStackTrace();
                 }
@@ -98,34 +106,49 @@ public class UI {
         return read;
     }
     /**
-     * Save keys to a file.
+     * Save key to a file.
      */
     private void saveKeys() throws IOException {
-        String fileName = "keys.txt";
+        String publicKeyFile = "public.txt";
+        String privateKeyFile = "private.txt";
         
-        Path path = Paths.get(fileName);
-        Files.deleteIfExists(path);
-        path = Paths.get(fileName);
-        Files.createFile(path);
+        Path publicKeyPath = Paths.get(publicKeyFile);
+        Files.deleteIfExists(publicKeyPath);
+        publicKeyPath = Paths.get(publicKeyFile);
+        Files.createFile(publicKeyPath);
+        
         for (BigInteger key: this.rsaKit.getPublicKey()) {
-            Files.writeString(path,
+            Files.writeString(publicKeyPath,
                     key.toString() + System.lineSeparator(),
                     StandardOpenOption.APPEND);
         }
-        Files.writeString(path, this.rsaKit.getPrivateKey()[1]
-                .toString() + System.lineSeparator(),
-                StandardOpenOption.APPEND);
+        
+        Path privateKeyPath = Paths.get(privateKeyFile);
+        Files.deleteIfExists(privateKeyPath);
+        privateKeyPath = Paths.get(privateKeyFile);
+        Files.createFile(privateKeyPath);
+        
+        for (BigInteger key: this.rsaKit.getPrivateKey()) {
+            Files.writeString(privateKeyPath,
+                    key.toString() + System.lineSeparator(),
+                    StandardOpenOption.APPEND);
+        }
     }
     
     /**
      * Load keys from a file.
+     * @param filename Name of the file to be saved.
      */
-    private void loadKeys() throws IOException {
-        String fileName = "keys.txt";
+    private void loadKey(String filename) throws IOException {
+        String file = filename + ".txt";
 
-        Path path = Paths.get(fileName);
+        Path path = Paths.get(file);
         List<String> read = Files.readAllLines(path);
-        this.rsaKit.setKeys(read);
+        if (filename.equals("public")) {
+            this.rsaKit.setPublicKey(read);
+        } else {
+            this.rsaKit.setPrivateKey(read);
+        }
         
     }
     /**
@@ -144,7 +167,7 @@ public class UI {
             ioe.printStackTrace();
         }
         
-        System.out.println("Encrypted message to file encrypted.txt");
+        System.out.println("Encrypted message saved to file encrypted.txt");
     }
     /**
      * Decrypts input that was given in previous command.
@@ -165,7 +188,7 @@ public class UI {
      */
     private void generateKeys() {
         System.out.println("Generating keys...");
-        this.rsaKit.createKeys(1024);
+        this.rsaKit.createKeys(BITLENGTH);
         System.out.println("Keys ready");
     }
     /**
@@ -175,11 +198,11 @@ public class UI {
         System.out.println("************** RSA-algorithm tool **************");
         System.out.println("Choose your command:");
         System.out.println("1: Generate public and private keys");
-        System.out.println("2: Encrypt message (must have generated keys)");
-        System.out.println("3: Decrypt message (must have generated keys)");
-        System.out.println("4: Save keys to a file (must have generated keys)");
-        System.out.println(
-                "5: Load keys from a file (must have generated keys)");
+        System.out.println("2: Encrypt message");
+        System.out.println("3: Decrypt message");
+        System.out.println("4: Save keys");
+        System.out.println("5: Load public key");
+        System.out.println("6: Load private key");
         System.out.println("0: Exit");
     }
 

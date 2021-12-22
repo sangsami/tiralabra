@@ -28,6 +28,7 @@ public class KeyGenerator {
     
     /**
      * Creates public and private keys for encryption from generated primes.
+     * @param bitLength the bit length of prime numbers generated for RSA keys
      */
     public void createKeys(int bitLength) {
         BigInteger p = generatePrime(bitLength, true);
@@ -76,18 +77,29 @@ public class KeyGenerator {
     public BigInteger[] getPrivateKey() {
         return this.privateKey;
     }
-    
-    public void setKeys(List<String> data) {
+    /**
+     * Sets public key read from a file.
+     * @param data List public key modulus and exponent read from a 
+     * file in String format.
+     */
+    public void setPublicKey(List<String> data) {
         this.publicKey[0] = new BigInteger(data.get(0)
                 .replace("\n", "")
                 .replace("\r", ""));
         this.publicKey[1] = new BigInteger(data.get(1)
                 .replace("\n", "")
                 .replace("\r", ""));
+    }
+    /**
+     * Sets private key read from a file.
+     * @param data List private key modulus and exponent read from a 
+     * file in String format.
+     */
+    public void setPrivateKey(List<String> data) {
         this.privateKey[0] = new BigInteger(data.get(0)
                 .replace("\n", "")
                 .replace("\r", ""));
-        this.privateKey[1] = new BigInteger(data.get(2)
+        this.privateKey[1] = new BigInteger(data.get(1)
                 .replace("\n", "")
                 .replace("\r", ""));
     }

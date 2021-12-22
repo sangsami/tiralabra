@@ -50,7 +50,11 @@ public class RSAKit {
         this.keyGenerator.createKeys(bitLength);
     }
     
-    public void setKeys(List<String> data) {
-        this.keyGenerator.setKeys(data);
+    public void setPublicKey(List<String> data) {
+        this.keyGenerator.setPublicKey(data);
+    }
+    
+    public void setPrivateKey(List<String> data) {
+        this.keyGenerator.setPrivateKey(data);
     }
 }

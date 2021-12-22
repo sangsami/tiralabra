@@ -48,16 +48,23 @@ public class KeyGeneratorTest {
     }
     
     @Test
-    public void keyGeneratorSetsKeysCorrectly() {
+    public void keyGeneratorSetsPublicKeyCorrectly() {
         List<String> data = new ArrayList<String>();
         data.add("3233\n\r");
         data.add("17\n\r");
-        data.add("413\n\r");
-        keyGenerator.setKeys(data);
+        keyGenerator.setPublicKey(data);
         BigInteger[] newPublicKey = keyGenerator.getPublicKey();
-        BigInteger[] newPrivateKey = keyGenerator.getPrivateKey();
         assertEquals("3233", newPublicKey[0].toString());
         assertEquals("17", newPublicKey[1].toString());
+        
+    }
+    
+        public void keyGeneratorSetsPrivateKeyCorrectly() {
+        List<String> data = new ArrayList<String>();
+        data.add("3233\n\r");
+        data.add("413\n\r");
+        keyGenerator.setPrivateKey(data);
+        BigInteger[] newPrivateKey = keyGenerator.getPrivateKey();
         assertEquals("3233", newPrivateKey[0].toString());
         assertEquals("413", newPrivateKey[1].toString());
         
