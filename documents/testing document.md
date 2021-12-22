@@ -20,7 +20,7 @@ One test was made: **encryptedDataIsDecryptedCorrectly()**
 Testing inputs were simple predetermined private keyy with a encrypted number where the outcome of decrypted number is already known.
 Encrypted number was inputted with a private key and then asserted that the result is same with the known decrypted number.
 
-### Ecrypt.java
+### Encrypt.java
 
 One test was made: **plainNumberEncryptedCorrectly()**
 
