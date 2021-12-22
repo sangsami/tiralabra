@@ -24,8 +24,8 @@ public class EcnryptTest {
     }
     private Encrypt encrypter = new Encrypt();
     @Test
-    public void encrypterWorksWithReadyMadeKey() {
-        // Source for keys wikipedia article about RSA
+    public void plainNumberEncryptedCorrectly() {
+        // Source for keys: Wikipedia article about RSA
         BigInteger[] publicKey = new BigInteger[2];
         publicKey[0] = new BigInteger("3233");
         publicKey[1] = new BigInteger("17");

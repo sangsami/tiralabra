@@ -45,7 +45,6 @@ public class UI {
      * Shows all commands and calls them according to input.
      */
     public final void run() {
-        System.out.println("************** RSA-algorithm tool **************");
         while (true) {
             printCommands();
             String input = this.io.readInput("Command: ");
@@ -166,14 +165,15 @@ public class UI {
      */
     private void generateKeys() {
         System.out.println("Generating keys...");
-        this.rsaKit.createKeys();
+        this.rsaKit.createKeys(1024);
         System.out.println("Keys ready");
     }
     /**
      * Prints all possible commands.
      */
     private void printCommands() {
-        System.out.println("Choose your options:");
+        System.out.println("************** RSA-algorithm tool **************");
+        System.out.println("Choose your command:");
         System.out.println("1: Generate public and private keys");
         System.out.println("2: Encrypt message (must have generated keys)");
         System.out.println("3: Decrypt message (must have generated keys)");

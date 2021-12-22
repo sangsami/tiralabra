@@ -46,8 +46,8 @@ public class RSAKit {
                 decrypter.Decrypt.decrypt(data, this.getPrivateKey()));
     }
     
-    public void createKeys() {
-        this.keyGenerator.createKeys();
+    public void createKeys(int bitLength) {
+        this.keyGenerator.createKeys(bitLength);
     }
     
     public void setKeys(List<String> data) {

@@ -24,7 +24,7 @@ public class DecryptTest {
     private Decrypt decrypter = new Decrypt();
     @Test
     public void encryptedDataIsDecryptedCorrectly() {
-        // Source for keys wikipedia article about RSA
+        // Source for keys: Wikipedia article about RSA
         BigInteger[] privateKey = new BigInteger[2];
         privateKey[0] = new BigInteger("3233");
         privateKey[1] = new BigInteger("413");
