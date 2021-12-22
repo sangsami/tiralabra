@@ -53,6 +53,7 @@ public class UI {
 
             if (input.equals("0")) {
                 System.out.println("Thank you, bye!");
+                this.rsaKit.printModulus();
                 break;
             } else if (input.equals("1")) {
                 generateKeys();
@@ -188,7 +189,7 @@ public class UI {
      */
     private void generateKeys() {
         System.out.println("Generating keys...");
-        this.rsaKit.createKeys(BITLENGTH);
+        this.rsaKit.createKeys(BITLENGTH/2);
         System.out.println("Keys ready");
     }
     /**

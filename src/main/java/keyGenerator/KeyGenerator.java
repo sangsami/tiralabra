@@ -103,6 +103,10 @@ public class KeyGenerator {
                 .replace("\n", "")
                 .replace("\r", ""));
     }
+    
+    public void printModulus() {
+        System.out.println(this.privateKey[0].bitLength());
+    }
     /**
      * Extended euclidean algorithm.
      * @param e publicKey.
@@ -120,12 +124,12 @@ public class KeyGenerator {
     }
     /**
      * Generates a random BigInteger of n bit length.
-     * @param n bit length of the generated random BigInteger.
+     * @param bitLength bit length of the generated random BigInteger.
      * @param shift shifts the lower bit length bound to n-1 if true.
      * @return BigInteger of n bit length.
      */
-    private BigInteger generatePrimeCandidate(int n, boolean shift) {
-        BigInteger candidate = new BigInteger(n, new Random());
+    private BigInteger generatePrimeCandidate(int bitLength, boolean shift) {
+        BigInteger candidate = new BigInteger(bitLength, new Random());
         if (shift) {
             candidate = candidate.setBit(0);
         }
@@ -133,16 +137,17 @@ public class KeyGenerator {
     }
     /**
      * Generates a prime number.
-     * @param n bit length of the generated random BigInteger.
+     * @param bitLength bit length of the generated random BigInteger.
      * @param shift shifts the lower bit length bound to n-1 if true.
      * @return BigInteger prime number of n bit length.
      */
-    public BigInteger generatePrime(int n, boolean shift) {
+    public BigInteger generatePrime(int bitLength, boolean shift) {
         BigInteger prime = BigInteger.TWO;
         
         while (!isPrime(prime, TESTTIMES)) {
-            prime = generatePrimeCandidate(n, true);
-        } return prime;
+            prime = generatePrimeCandidate(bitLength, true);
+        } 
+        return prime;
     }
     /**
      * Test if candidate is divisible by first 100 primes.
