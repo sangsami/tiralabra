@@ -189,7 +189,7 @@ public class UI {
      */
     private void generateKeys() {
         System.out.println("Generating keys...");
-        this.rsaKit.createKeys(BITLENGTH/2);
+        this.rsaKit.createKeys(BITLENGTH / 2);
         System.out.println("Keys ready");
     }
     /**
