@@ -18,9 +18,9 @@ import encrypter.Encrypt;
  *
  * @author samidinh
  */
-public class EcnryptTest {
+public class EnryptTest {
     
-    public EcnryptTest() {
+    public EnryptTest() {
     }
     private Encrypt encrypter = new Encrypt();
     @Test

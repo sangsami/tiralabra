@@ -58,7 +58,4 @@ public class RSAKit {
         this.keyGenerator.setPrivateKey(data);
     }
     
-    public void printModulus() {
-        this.keyGenerator.printModulus();
-    }
 }

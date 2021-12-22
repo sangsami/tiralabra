@@ -59,7 +59,8 @@ public class KeyGeneratorTest {
         
     }
     
-        public void keyGeneratorSetsPrivateKeyCorrectly() {
+    @Test
+    public void keyGeneratorSetsPrivateKeyCorrectly() {
         List<String> data = new ArrayList<String>();
         data.add("3233\n\r");
         data.add("413\n\r");

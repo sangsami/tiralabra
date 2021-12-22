@@ -103,10 +103,8 @@ public class KeyGenerator {
                 .replace("\n", "")
                 .replace("\r", ""));
     }
+
     
-    public void printModulus() {
-        System.out.println(this.privateKey[0].bitLength());
-    }
     /**
      * Extended euclidean algorithm.
      * @param e publicKey.
