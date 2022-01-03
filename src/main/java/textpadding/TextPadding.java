@@ -21,7 +21,6 @@ public class TextPadding {
      /**
      * Turns cipher to plain text.
      * @param data cipher to be turned back to plain text.
-     * @param privateKey to cipher the data.
      * @return ciphered text.
      */
     public static String cipherToText(BigInteger data) {

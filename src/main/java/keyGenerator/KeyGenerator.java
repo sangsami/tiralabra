@@ -49,7 +49,7 @@ public class KeyGenerator {
         */
         BigInteger e = new BigInteger("65537");
         System.out.println("Public key e created...");
-        BigInteger d = modularMultiplicativeInverse(e, totient);
+        BigInteger d = modularMultipInv(e, totient);
         System.out.println("Private key d created...");
 
         this.publicKey[0] = n;
@@ -116,15 +116,14 @@ public class KeyGenerator {
      * @param n RSA modulus.
      * @return modular multiplicative inverse in BigInteger.
      */
-    private BigInteger modularMultiplicativeInverse(BigInteger e, BigInteger n)
-    {
+    private BigInteger modularMultipInv(BigInteger e, BigInteger n) {
         if (e.compareTo(BigInteger.ONE) == 0) {
             return BigInteger.ONE;
         } 
         BigInteger d = BigInteger.ONE
                 .add(n.multiply(
                         e.subtract(
-                                modularMultiplicativeInverse(n.mod(e), e))))
+                                modularMultipInv(n.mod(e), e))))
                 .divide(e);
         return d;
     }
