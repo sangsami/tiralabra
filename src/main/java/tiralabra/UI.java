@@ -68,13 +68,13 @@ public class UI {
                 }
             } else if (input.equals("5")) {
                 try {
-                    loadKey("public");
+                    loadKey("publicKey");
                 } catch (IOException ioe) {
                     ioe.printStackTrace();
                 }
             } else if (input.equals("6")) {
                try {
-                    loadKey("private");
+                    loadKey("privateKey");
                 } catch (IOException ioe) {
                     ioe.printStackTrace();
                 }
@@ -91,7 +91,6 @@ public class UI {
 
         Path path = Paths.get(fileName);
         Files.write(path, encrypted.toByteArray());
-        
     }
     
     /**
@@ -109,8 +108,8 @@ public class UI {
      * Save key to a file.
      */
     private void saveKeys() throws IOException {
-        String publicKeyFile = "public.txt";
-        String privateKeyFile = "private.txt";
+        String publicKeyFile = "publicKey.txt";
+        String privateKeyFile = "privateKey.txt";
         
         Path publicKeyPath = Paths.get(publicKeyFile);
         Files.deleteIfExists(publicKeyPath);
@@ -144,7 +143,7 @@ public class UI {
 
         Path path = Paths.get(file);
         List<String> read = Files.readAllLines(path);
-        if (filename.equals("public")) {
+        if (filename.equals("publicKey")) {
             this.rsaKit.setPublicKey(read);
         } else {
             this.rsaKit.setPrivateKey(read);

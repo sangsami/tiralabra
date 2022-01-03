@@ -19,7 +19,7 @@ public class KeyGenerator {
     /** Array size for returnable key array. */
     private static final int ARRSIZE = 3;
     /** Times to loop Miller-Rabin primality test. */
-    private static final int TESTTIMES = 128;
+    private static final int TESTTIMES = 64;
     
     public KeyGenerator() {
         this.publicKey = new BigInteger[2];
@@ -31,31 +31,25 @@ public class KeyGenerator {
      * @param bitLength the bit length of prime numbers generated for RSA keys
      */
     public void createKeys(int bitLength) {
-        BigInteger p = generatePrime(bitLength, true);
-        BigInteger q = generatePrime(bitLength, true);
+        BigInteger p = generatePrime(bitLength);
+        BigInteger q = generatePrime(bitLength);
         
         // RSA modulus
         BigInteger n = p.multiply(q);
         System.out.println("Modulus n created...");
-        BigInteger pMinus = p.subtract(BigInteger.ONE);
-        BigInteger qMinus = q.subtract(BigInteger.ONE);
         
         // Carmichael's totient
-        BigInteger totient = pMinus
-                .divide(pMinus.gcd(qMinus))
-                .multiply(qMinus)
-                .abs(); //lcm(n)
+        BigInteger totient = carmichaelsTotient(p, q);
          
-        // Find a comprime of the totient
-        BigInteger e = BigInteger.TWO;
-        while (!e.gcd(totient).equals(BigInteger.ONE)) {
-            do {
-                e = generatePrimeCandidate(totient.bitLength(), false); 
-            } 
-            while (e.compareTo(totient) >= 0);
-        }
+        /* 
+        Using 65537 as the public exponent as it's the largest known prime
+        with the form 2^k+1 and it's commonly used in RSA cryptosystems. 
+        Generating a larger coprime gains little added security for more
+        computation
+        */
+        BigInteger e = new BigInteger("65537");
         System.out.println("Public key e created...");
-        BigInteger d = modMultipInv(e, totient);
+        BigInteger d = modularMultiplicativeInverse(e, totient);
         System.out.println("Private key d created...");
 
         this.publicKey[0] = n;
@@ -103,47 +97,58 @@ public class KeyGenerator {
                 .replace("\n", "")
                 .replace("\r", ""));
     }
-
-    
     /**
-     * Extended euclidean algorithm.
+     * Calculates the Carmichael's totient.
+     * @param p prime number.
+     * @param q prime number.
+     * @return Carmichael's totient.
+     */
+    private BigInteger carmichaelsTotient(BigInteger p, BigInteger q) {
+        return p.subtract(BigInteger.ONE)
+                .divide(p.subtract(BigInteger.ONE)
+                        .gcd(q.subtract(BigInteger.ONE)))
+                .multiply(q.subtract(BigInteger.ONE))
+                .abs(); //lcm(n)
+    }
+    /**
+     * Calculates the modular multiplicative inverse.
      * @param e publicKey.
      * @param n RSA modulus.
      * @return modular multiplicative inverse in BigInteger.
      */
-    private BigInteger modMultipInv(BigInteger e, BigInteger n) {
+    private BigInteger modularMultiplicativeInverse(BigInteger e, BigInteger n)
+    {
         if (e.compareTo(BigInteger.ONE) == 0) {
             return BigInteger.ONE;
         } 
         BigInteger d = BigInteger.ONE
-                .add(n.multiply(e.subtract(modMultipInv(n.mod(e), e))))
+                .add(n.multiply(
+                        e.subtract(
+                                modularMultiplicativeInverse(n.mod(e), e))))
                 .divide(e);
         return d;
     }
     /**
      * Generates a random BigInteger of n bit length.
      * @param bitLength bit length of the generated random BigInteger.
-     * @param shift shifts the lower bit length bound to n-1 if true.
      * @return BigInteger of n bit length.
      */
-    private BigInteger generatePrimeCandidate(int bitLength, boolean shift) {
+    private BigInteger generatePrimeCandidate(int bitLength) {
         BigInteger candidate = new BigInteger(bitLength, new Random());
-        if (shift) {
-            candidate = candidate.setBit(0);
-        }
+        // shifts the generated integer lower bound to bitLength-1.
+        candidate = candidate.setBit(0);
         return candidate;
     }
     /**
      * Generates a prime number.
      * @param bitLength bit length of the generated random BigInteger.
-     * @param shift shifts the lower bit length bound to n-1 if true.
      * @return BigInteger prime number of n bit length.
      */
-    public BigInteger generatePrime(int bitLength, boolean shift) {
+    public BigInteger generatePrime(int bitLength) {
         BigInteger prime = BigInteger.TWO;
         
         while (!isPrime(prime, TESTTIMES)) {
-            prime = generatePrimeCandidate(bitLength, true);
+            prime = generatePrimeCandidate(bitLength);
         } 
         return prime;
     }
@@ -182,7 +187,7 @@ public class KeyGenerator {
      * @param n times to repeat test.
      * @return Boolean value if given number passes all tests.
      */
-    private Boolean millerRabinRepeater(BigInteger candidate, int n) {
+    private Boolean millerRabinTest(BigInteger candidate, int n) {
         // Miller-Rabin primality test, will be moved as own method soon
         BigInteger d = candidate.subtract(BigInteger.ONE);
         
@@ -190,7 +195,7 @@ public class KeyGenerator {
             d = d.shiftRight(1);
         }
         for (int i = 0; i < n; i++) {
-            if (!millerRabinTest(d, candidate)) {
+            if (!millerRabin(d, candidate)) {
                 return false;
             }
         }
@@ -202,7 +207,7 @@ public class KeyGenerator {
      * @param candidate prime candidate and modulus for modular arithmetics.
      * @return Boolean value if given number passes all tests.
      */
-    private Boolean millerRabinTest(BigInteger d, BigInteger candidate) {
+    private Boolean millerRabin(BigInteger d, BigInteger candidate) {
         BigInteger a;
         Random rand = new Random();
         do {
@@ -239,7 +244,7 @@ public class KeyGenerator {
             return false;
         }
         
-        if (!millerRabinRepeater(candidate, n)) {
+        if (!millerRabinTest(candidate, n)) {
             return false;
         }
         return true;

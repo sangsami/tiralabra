@@ -35,7 +35,7 @@ public class KeyGeneratorTest {
     
     @Test
     public void keyGeneratorCreatesKeysProbablePrimes() {
-        BigInteger primeCandidate = keyGenerator.generatePrime(1024, true);
+        BigInteger primeCandidate = keyGenerator.generatePrime(1024);
         assertTrue(primeCandidate.isProbablePrime(10));
     }
     
