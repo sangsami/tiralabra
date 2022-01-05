@@ -2,7 +2,6 @@
 /project/nbproject/
 /*.DS_Store
 /build/*
-!/build/docs
 *.js
 *.css
 privateKey.txt
