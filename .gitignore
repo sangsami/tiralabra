@@ -8,4 +8,4 @@ privateKey.txt
 publicKey.txt
 message.txt
 
-!/build/docs/
+!*/build/docs/
