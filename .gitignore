@@ -4,3 +4,6 @@
 *.html
 *.js
 *.css
+privateKey.txt
+publicKey.txt
+message.txt

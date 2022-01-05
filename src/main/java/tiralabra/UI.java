@@ -87,7 +87,7 @@ public class UI {
      * Save encrypted message to a file.
      */
     private void saveMessage() throws IOException {
-        String fileName = "encrypted.txt";
+        String fileName = "message.txt";
 
         Path path = Paths.get(fileName);
         Files.write(path, encrypted.toByteArray());
@@ -98,7 +98,7 @@ public class UI {
      * @return byte array message from file to be decrypted.
      */
     private byte[] loadMessage() throws IOException {
-        String fileName = "encrypted.txt";
+        String fileName = "message.txt";
 
         Path path = Paths.get(fileName);
         byte[] read = Files.readAllBytes(path);
@@ -166,7 +166,7 @@ public class UI {
             ioe.printStackTrace();
         }
         
-        System.out.println("Encrypted message saved to file encrypted.txt");
+        System.out.println("Encrypted message saved to file named message.txt");
     }
     /**
      * Decrypts input that was given in previous command.

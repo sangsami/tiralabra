@@ -12,9 +12,15 @@ import keygenerator.KeyGenerator;
 public class RSAKit {    
     /** KeyGenerator object. */
     private KeyGenerator keyGenerator;
+    private Decrypt decrypter;
+    private Encrypt encrypter;
+    private TextPadding textpadder;
 
     public RSAKit() {
         this.keyGenerator = new KeyGenerator();
+        this.decrypter = new Decrypt();
+        this.encrypter = new Encrypt();
+        this.textpadder = new TextPadding();
 
     }
     
@@ -27,24 +33,24 @@ public class RSAKit {
     }
     
     private BigInteger padToCipher(String message) {
-        return textpadding.TextPadding.textToCipher(
+        return textpadder.textToCipher(
                 message);
     }
     
     private String padToText(BigInteger data) {
-        return textpadding.TextPadding.cipherToText(
+        return textpadder.cipherToText(
                 data);
     }
     
     public BigInteger encrypt(String message) {
-        return encrypter.Encrypt.encrypt(
+        return encrypter.encrypt(
                 this.padToCipher(message),
                 this.getPublicKey());
     }
     
     public String decrypt(byte[] data) {
         return this.padToText(
-                decrypter.Decrypt.decrypt(
+                decrypter.decrypt(
                         data,
                         this.getPrivateKey()));
     }
