@@ -2,6 +2,7 @@
 
 ## Coverage report for unit tests
 
+[![codecov](https://codecov.io/gh/SangSami/tiralabra/branch/main/graph/badge.svg?token=S2RJH7EL6I)](https://codecov.io/gh/SangSami/tiralabra)
 
 ## What was tested and how
 
