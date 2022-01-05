@@ -1,5 +1,3 @@
-# HOX! Jouduin lähtemään viisureiden poistoon, joten raporttien teko jäi kesken. Harjoitustyö tulee olemaan kokonaisuudessaan valmis maanantai- tai tiistai-iltana 3-4.1.2022
-
 # tiralabra
 
 [![codecov](https://codecov.io/gh/SangSami/tiralabra/branch/main/graph/badge.svg?token=S2RJH7EL6I)](https://codecov.io/gh/SangSami/tiralabra)
