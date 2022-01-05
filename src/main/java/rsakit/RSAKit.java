@@ -12,8 +12,11 @@ import keygenerator.KeyGenerator;
 public class RSAKit {    
     /** KeyGenerator object. */
     private KeyGenerator keyGenerator;
+    /** Decrypt object. */
     private Decrypt decrypter;
+    /** Encrypt object. */
     private Encrypt encrypter;
+    /** TextPadding object. */
     private TextPadding textpadder;
 
     public RSAKit() {
