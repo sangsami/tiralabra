@@ -7,3 +7,5 @@
 privateKey.txt
 publicKey.txt
 message.txt
+
+!/project/build/docs/
