@@ -1,8 +1,0 @@
-decryptertest/DecryptTest.java
- decryptertest.DecryptTest
-encryptertest/EnryptTest.java
- encryptertest.EnryptTest
-textpaddingtest/TextPaddingTest.java
- textpaddingtest.TextPaddingTest
-keygeneratortest/KeyGeneratorTest.java
- keygeneratortest.KeyGeneratorTest
