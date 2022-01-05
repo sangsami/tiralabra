@@ -5,6 +5,17 @@
 ## DESCRIPTION
 A coding project about RSA-encryption for the course "Aineopintojen harjoitustyö: Tietorakenteet ja algoritmit"
 
+## How to run
+
+* Download release file
+* Extract either .tar or .zip file named 'tiralabra'
+* In the extracted folder, run the executable file located in bin folder
+
+### From source code
+* From command line: 
+  * Install any dependencies with: `./gradlew wrapper`
+  * Run the code: `./gradlew run`
+
 ## Documentation
 [specification document](https://github.com/Sangsami/tiralabra/blob/main/documents/specification%20document.md)
 
