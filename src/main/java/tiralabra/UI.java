@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -63,20 +64,30 @@ public class UI {
             } else if (input.equals("4")) {
                 try {
                     saveKeys();
+                    System.out.println("Saving succesfull!");
                 } catch (IOException ioe) {
                     ioe.printStackTrace();
+                } catch (NullPointerException npe) {
+                    System.out.println(
+                            "No keys have been generated or loaded!");
                 }
             } else if (input.equals("5")) {
                 try {
                     loadKey("publicKey");
+                    System.out.println("Public key loaded!");
                 } catch (IOException ioe) {
                     ioe.printStackTrace();
+                } catch (IndexOutOfBoundsException iob) {
+                    System.out.println("The file is empty!");
                 }
             } else if (input.equals("6")) {
                try {
                     loadKey("privateKey");
-                } catch (IOException ioe) {
+                    System.out.println("Private key loaded!");
+                }  catch (IOException ioe) {
                     ioe.printStackTrace();
+                } catch (IndexOutOfBoundsException iob) {
+                    System.out.println("The file is empty!");
                 }
             } else {
                 System.out.println("Invalid command");
@@ -97,7 +108,7 @@ public class UI {
      * Load encrypted message from a file.
      * @return byte array message from file to be decrypted.
      */
-    private byte[] loadMessage() throws IOException {
+    private byte[] loadMessage() throws IOException, IndexOutOfBoundsException {
         String fileName = "message.txt";
 
         Path path = Paths.get(fileName);
@@ -107,7 +118,9 @@ public class UI {
     /**
      * Save key to a file.
      */
-    private void saveKeys() throws IOException {
+    private void saveKeys() throws 
+            IOException,
+            NullPointerException {
         String publicKeyFile = "publicKey.txt";
         String privateKeyFile = "privateKey.txt";
         
@@ -138,7 +151,8 @@ public class UI {
      * Load keys from a file.
      * @param filename Name of the file to be saved.
      */
-    private void loadKey(String filename) throws IOException {
+    private void loadKey(String filename) throws 
+            IOException, NoSuchFileException {
         String file = filename + ".txt";
 
         Path path = Paths.get(file);
@@ -156,16 +170,19 @@ public class UI {
     private void encrypt() {
         String message = io.readInput("Give input: ");
         if (message.isEmpty()) {
+            System.out.println("Message was empty, try again");
             return;
         }
-        System.out.println("Encrypting...");
-        encrypted = this.rsaKit.encrypt(message);
+        System.out.println("Encrypting...");        
         try {
+            encrypted = this.rsaKit.encrypt(message);
             saveMessage();
         } catch (IOException ioe) {
             ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            System.out.println(
+                    "No keys have been loaded or generated for encryption!");
         }
-        
         System.out.println("Encrypted message saved to file named message.txt");
     }
     /**
@@ -176,10 +193,11 @@ public class UI {
         try {
             String message = this.rsaKit.decrypt(loadMessage());
             System.out.println("Decrypted message: " + message);
-        } catch (Exception e) {
+        } catch (IOException ioe) {
+            System.out.println("Something went wrong!");
+        } catch (NullPointerException npe) {
             System.out.println(
-                    "Something went wrong!"
-            );
+                    "No keys have been loaded or generated for decryption!");
         }
     }
     /**
