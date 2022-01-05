@@ -1,11 +1,9 @@
 /project/target/
 /project/nbproject/
 .DS_Store
-*.html
 *.js
 *.css
 privateKey.txt
 publicKey.txt
 message.txt
 
-!*/build/docs/
