@@ -1,6 +1,8 @@
 /project/target/
 /project/nbproject/
-.DS_Store
+/*.DS_Store
+/build/*
+!/build/docs
 *.js
 *.css
 privateKey.txt
