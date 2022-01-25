@@ -26,10 +26,6 @@ public class UI {
     private IO io;
     /** Tool to call other components. */
     private RSAKit rsaKit;
-    /** Public key array. */
-    private BigInteger[] publicKey = new BigInteger[2];
-    /** Private key array. */
-    private BigInteger[] privateKey = new BigInteger[2];
     /** Encrypted message. */
     private BigInteger encrypted;
     /** 1024 bit length for prime numbers used RSA key generation. */
